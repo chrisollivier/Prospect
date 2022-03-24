@@ -1,4 +1,4 @@
-package com.SIO.Questionner.tools;
+package sio.nsi.prospect.tools;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
@@ -19,7 +19,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import third.part.android.util.Base64;
+import android.util.Base64;
 
 /**
  * A class to make more easy and simple the encrypt routines, this is the core of Encryption library

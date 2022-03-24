@@ -1,4 +1,4 @@
-package com.SIO.Questionner.tools;
+package sio.nsi.prospect.tools;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
-import com.SIO.Questionner.model.User;
+import sio.nsi.prospect.model.User;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -122,8 +122,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 userArrayList.add(new User(
                         cursorUser.getInt(0),
                         encryption.decryptOrNull(cursorUser.getString(1)),
-                        encryption.decryptOrNull(cursorUser.getString(2)),
-                        cursorUser.getInt(3)
+                        encryption.decryptOrNull(cursorUser.getString(2))
                 ));
             } while (cursorUser.moveToNext());
             // moving our cursor to next.

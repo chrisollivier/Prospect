@@ -1,4 +1,4 @@
-package sio.nsi.prospect;
+package sio.nsi.prospect.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
