@@ -4,25 +4,32 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class User {
-    private int id;
+    private int Id;
+    private String email;
+    private String password;
     private String nom;
     private String prenom;
-    private int actuelScore;
-    private int lastScore;
+
+    public User(String email,String password) {
+        this.email = email;
+        this.password = password;
+    }
 
 
-    public User(int id, String nom, String prenom) {
-        this.id = id;
+    public User(int Id, String email, String password, String nom, String prenom) {
+        this.Id =Id;
+        this.email = email;
+        this.password = password;
         this.nom = nom;
         this.prenom = prenom;
     }
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.Id = id;
     }
 
     public String getNom() {
@@ -41,19 +48,20 @@ public class User {
         this.prenom = prenom;
     }
 
-    public int getActuelScore() {
-        return actuelScore;
+    public String getEmail() {
+        return email;
     }
 
-    public void setActuelScore(int actuelScore) {
-        this.actuelScore = actuelScore;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getLastScore() {
-        return lastScore;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLastScore(int lastScore) {
-        this.lastScore = lastScore;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
 }
