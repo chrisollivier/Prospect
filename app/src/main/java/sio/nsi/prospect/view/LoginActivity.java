@@ -31,6 +31,10 @@ public class LoginActivity extends AppCompatActivity {
     public View.OnClickListener eventBtnlogin = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            User tempUser = new User("admin@gmail.com","123456789","AdminUser","AdminUser");
+
+            dataBase.addNewUser(tempUser);
+
             User user = new User(InputLogin.getText().toString(),InputPassword.getText().toString());
             ArrayList<User> allUser = dataBase.readUser(user);
             if (allUser.get(0).getPassword() == user.getPassword()){
