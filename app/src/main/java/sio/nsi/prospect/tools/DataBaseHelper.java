@@ -88,7 +88,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     // we have created a new method for reading all the courses.
