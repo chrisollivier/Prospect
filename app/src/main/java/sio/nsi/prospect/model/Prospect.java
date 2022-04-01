@@ -25,6 +25,12 @@ public class Prospect {
         this.score = score;
     }
 
+    public Prospect(String nom, String prenom, String raisonSociale) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.raisonSociale = raisonSociale;
+    }
+
     public int getId() {
         return Id;
     }

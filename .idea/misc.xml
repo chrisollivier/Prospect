@@ -4,10 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Dev/Prospect/app/src/main/res/drawable/gradient_background.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/Mathis/Google Drive/SIO2/B2-POO/NSI/Prospect/app/src/main/res/layout/accueilactivity.xml" value="0.19895833333333332" />
-        <entry key="..\:/Users/Mathis/Google Drive/SIO2/B2-POO/NSI/Prospect/app/src/main/res/layout/addproscpect_activity.xml" value="0.3614583333333333" />
-        <entry key="..\:/Users/Mathis/Google Drive/SIO2/B2-POO/NSI/Prospect/app/src/main/res/layout/addprospect_activity.xml" value="0.228125" />
         <entry key="..\:/Users/Mathis/Google Drive/SIO2/B2-POO/NSI/Prospect/app/src/main/res/layout/loginactivity.xml" value="0.25625" />
+        <entry key="app/src/main/res/layout/accueilactivity.xml" value="0.2165175728175951" />
+        <entry key="app/src/main/res/layout/itemlayout.xml" value="0.26725921630859373" />
+        <entry key="app/src/main/res/layout/loginactivity.xml" value="0.13728470111448834" />
       </map>
     </option>
   </component>

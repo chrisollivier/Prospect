@@ -37,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
 
 
-           // User tempUser = new User("admin@gmail.com","yo","AdminUser","AdminUser");
-           // dataBase.addNewUser(tempUser);
+           //User tempUser = new User("admin@gmail.com","yo","AdminUser","AdminUser");
+           //dataBase.addNewUser(tempUser);
 
 
             User user = new User(InputLogin.getText().toString(),InputPassword.getText().toString());
