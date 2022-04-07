@@ -2,6 +2,7 @@ package sio.nsi.prospect.view;
 
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
+import android.os.StrictMode;
 import android.util.Log;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,11 @@ public class AddProspectActivity extends AppCompatActivity {
         InputRS = (EditText) findViewById(R.id.inputRS);
 
         BtnSiret.setOnClickListener(eventBtnsiret);
+
+        // Permet de désactiver les restrictions de networkonmain
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
     }
 
     public View.OnClickListener eventBtnsiret = new View.OnClickListener() {
@@ -36,5 +42,4 @@ public class AddProspectActivity extends AppCompatActivity {
             }
         }
     };
-
 }

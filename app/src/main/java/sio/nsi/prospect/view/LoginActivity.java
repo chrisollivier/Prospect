@@ -36,8 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
 
 
-           //User tempUser = new User("admin@gmail.com","yo","AdminUser","AdminUser");
-           //dataBase.addNewUser(tempUser);
+           User tempUser = new User("admin@gmail.com","yo","AdminUser","AdminUser");
+           dataBase.addNewUser(tempUser);
 
 
             User user = new User(InputLogin.getText().toString(),InputPassword.getText().toString());
@@ -47,9 +47,9 @@ public class LoginActivity extends AppCompatActivity {
             Log.d("Comparaison", "-" + allUser.get(0).getPassword() + "- vs -" + user.getPassword() + "-");
 
 
-            if (user.getPassword().equals(allUser.get(0).getPassword())){
+            if ( user.getPassword() != null && allUser.get(0).getPassword() != null && user.getPassword().equals(allUser.get(0).getPassword())){
                 Log.d("connexion", "Connexion effectuée : " + allUser.get(0).getPassword());
-                Intent connexion = new Intent(LoginActivity.this, AddProspectActivity.class);
+                Intent connexion = new Intent(LoginActivity.this, AccueilActivity.class);
                 startActivity(connexion);
             }else{
                 InputPassword.setError("Password and username didn't match");
