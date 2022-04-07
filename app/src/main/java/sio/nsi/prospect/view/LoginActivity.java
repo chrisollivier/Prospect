@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import android.widget.EditText;
@@ -34,6 +36,10 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
 
 
+           //User tempUser = new User("admin@gmail.com","yo","AdminUser","AdminUser");
+           //dataBase.addNewUser(tempUser);
+
+
             User user = new User(InputLogin.getText().toString(),InputPassword.getText().toString());
             ArrayList<User> allUser = dataBase.readUser(user);
 
@@ -41,12 +47,12 @@ public class LoginActivity extends AppCompatActivity {
             Log.d("Comparaison", "-" + allUser.get(0).getPassword() + "- vs -" + user.getPassword() + "-");
 
 
-
             if (user.getPassword().equals(allUser.get(0).getPassword())){
                 Log.d("connexion", "Connexion effectuée : " + allUser.get(0).getPassword());
-                Intent connexion = new Intent(LoginActivity.this, AccueilActivity.class);
+                Intent connexion = new Intent(LoginActivity.this, AddProspectActivity.class);
                 startActivity(connexion);
             }else{
+                InputPassword.setError("Password and username didn't match");
                 Log.d("Error","connection failed");
             }
         }
