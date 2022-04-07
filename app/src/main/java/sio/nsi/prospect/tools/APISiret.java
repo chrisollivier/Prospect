@@ -3,6 +3,8 @@ package sio.nsi.prospect.tools;
 import android.accounts.NetworkErrorException;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,10 +32,21 @@ public class APISiret {
                 return line;
             }
         }
-        return "Error";
+        return "couldn't find data";
     }
 
-    public String getDataFromSiret(String search) throws IOException {
+    public static String getSiretFromText(String search) throws IOException, NetworkOnMainThreadException {
+        Log.d("siret", "searching : " + search);
+        URL url = new URL(UrlAPI_RaisonSociale+search);
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+            for (String line; (line = reader.readLine()) != null; ) {
+                return getSiretFromData(line);
+            }
+        }
+        return "couldn't find data";
+    }
+
+    public static String getDataFromSiret(String search) throws IOException {
         URL url = new URL(UrlAPI_Siret+search);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
             for (String line; (line = reader.readLine()) != null; ) {
@@ -41,5 +54,14 @@ public class APISiret {
             }
         }
         return "Error";
+    }
+
+    public static String getSiretFromData(String data) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("etablissement").getJSONObject(0).getString("siret");
+        }catch (JSONException err){
+            return "couldn't find siret";
+        }
     }
 }
