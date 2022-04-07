@@ -1,8 +1,5 @@
 package sio.nsi.prospect.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 public class User {
     private int Id;
     private String email;

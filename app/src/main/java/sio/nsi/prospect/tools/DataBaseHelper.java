@@ -5,18 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import androidx.annotation.Nullable;
 import sio.nsi.prospect.model.Prospect;
 import sio.nsi.prospect.model.User;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 
 
@@ -26,16 +18,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String salt = "YourSalt";
     private static final byte[] iv = new byte[16];
 
-    private static Encryption encryption = Encryption.getDefault(key, salt, iv);
+    private static final Encryption encryption = Encryption.getDefault(key, salt, iv);
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "NSIProspect.db", null, 3);
+        super(context, "NSIProspect.db", null, 6);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CreateTableStatementUser = "create table user( Id INTEGER PRIMARY KEY AUTOINCREMENT,email text, password text, nom TEXT, prenom TEXT);";
         String CreateTableStatementProspect = "create table prospect(Id INTEGER primary key autoincrement,nom text,prenom text,siret text,raisonSociale text, score integer);";
+
 
         sqLiteDatabase.execSQL(CreateTableStatementUser);
         sqLiteDatabase.execSQL(CreateTableStatementProspect);
@@ -50,6 +43,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(CreateTableStatementDeleteProspect);
 
         onCreate(sqLiteDatabase);
+
+        User tempUser = new User("admin@gmail.com","yo","AdminUser","AdminUser");
+        this.addNewUser(tempUser);
+
+        Log.v("Update","Update succefull ! ");
     }
 
 

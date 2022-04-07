@@ -13,7 +13,6 @@ import sio.nsi.prospect.model.User;
 import sio.nsi.prospect.tools.DataBaseHelper;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity {
     private DataBaseHelper dataBase;
@@ -33,10 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     public View.OnClickListener eventBtnlogin = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-
-           // User tempUser = new User("admin@gmail.com","yo","AdminUser","AdminUser");
-           // dataBase.addNewUser(tempUser);
 
 
             User user = new User(InputLogin.getText().toString(),InputPassword.getText().toString());
