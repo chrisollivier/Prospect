@@ -21,9 +21,7 @@ public class AccueilActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueilactivity);
-
         recycler_View = (RecyclerView) findViewById(R.id.recycler_View);
-
         setRecyclerView();
     }
 
@@ -36,7 +34,8 @@ public class AccueilActivity extends AppCompatActivity {
 
     private List<Prospect> getList() {
 
-        List<Prospect> prospect_list= new ArrayList<>();
+        ArrayList<Prospect> prospect_list= new ArrayList<>();
+        prospect_list.add(new Prospect("Ricardo","Milos","pepeIndustry"));
         prospect_list.add(new Prospect("Ricardo","Milos","pepeIndustry"));
         return prospect_list;
     }
