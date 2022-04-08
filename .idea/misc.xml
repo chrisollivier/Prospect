@@ -8,7 +8,11 @@
         <entry key="..\:/Users/Mathis/Google Drive/SIO2/B2-POO/NSI/Prospect/app/src/main/res/layout/addprospect_activity.xml" value="0.265625" />
         <entry key="..\:/Users/Mathis/Google Drive/SIO2/B2-POO/NSI/Prospect/app/src/main/res/layout/itemlayout.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/Mathis/Google Drive/SIO2/B2-POO/NSI/Prospect/app/src/main/res/layout/loginactivity.xml" value="0.25625" />
-        <entry key="app/src/main/res/layout/accueilactivity.xml" value="0.2165175728175951" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2765" />
+        <entry key="app/src/main/res/drawable/gradient_background.xml" value="0.2765" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2765" />
+        <entry key="app/src/main/res/layout/accueilactivity.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/addprospect_activity.xml" value="0.22146739130434784" />
         <entry key="app/src/main/res/layout/itemlayout.xml" value="0.26725921630859373" />
         <entry key="app/src/main/res/layout/loginactivity.xml" value="0.13728470111448834" />
       </map>
