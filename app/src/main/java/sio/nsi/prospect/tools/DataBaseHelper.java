@@ -17,6 +17,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String key = "YourKey";
     private static final String salt = "YourSalt";
     private static final byte[] iv = new byte[16];
+    private static int userResult = 0;
 
     private static final Encryption encryption = Encryption.getDefault(key, salt, iv);
 
@@ -59,28 +60,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             user.setNom(encryption.encrypt(user.getNom()));
             user.setPrenom(encryption.encrypt(user.getPrenom()));
 
-            // on below line we are creating a variable for
-            // our sqlite database and calling writable method
-            // as we are writing data in our database.
-
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-            // on below line we are creating a
-            // variable for content values.
             ContentValues values = new ContentValues();
 
-            // on below line we are passing all values
-            // along with its key and value pair.
             values.put("email",user.getEmail());
             values.put("password",user.getPassword());
             values.put("nom", user.getNom());
             values.put("prenom", user.getPrenom());
 
-            // after adding all values we are passing
-            // content values to our table.
             sqLiteDatabase.insert("user", null, values);
 
-            // at last we are closing our
-            // database after adding database.
             sqLiteDatabase.close();
 
         } catch (Exception e) {
@@ -88,24 +77,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    // we have created a new method for reading all the courses.
-
-    public ArrayList<User> readUser(User user) {
-        // on below line we are creating a
-        // database for reading our database.
+    public ArrayList<User> readAllUser() {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // on below line we are creating a cursor with query to read data from database.
-        Cursor cursorUser = db.rawQuery("SELECT * FROM user WHERE email = ?", new String[]{encryption.encryptOrNull(user.getEmail())});
+        Cursor cursorUser = db.rawQuery("SELECT * FROM user", new String[]{});
 
-        // on below line we are creating a new array list.
         ArrayList<User> userArrayList = new ArrayList<>();
 
-        // moving our cursor to first position.
         if (cursorUser.moveToFirst()) {
             do {
-                // on below line we are adding the data from cursor to our array list.
                 userArrayList.add(new User(
                         cursorUser.getInt(0),
                         encryption.decryptOrNull(cursorUser.getString(1)),
@@ -114,40 +95,61 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         encryption.decryptOrNull(cursorUser.getString(4))
                 ));
             } while (cursorUser.moveToNext());
-            // moving our cursor to next.
         }
-        // at last closing our cursor
-        // and returning our array list.
         cursorUser.close();
         return userArrayList;
+    }
+
+    public ArrayList<User> readUser(User user) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorUser = db.rawQuery("SELECT * FROM user WHERE email = ?", new String[]{encryption.encryptOrNull(user.getEmail())});
+
+        ArrayList<User> userArrayList = new ArrayList<>();
+        if (cursorUser.moveToFirst()) {
+            do {
+                userArrayList.add(new User(
+                        cursorUser.getInt(0),
+                        encryption.decryptOrNull(cursorUser.getString(1)),
+                        encryption.decryptOrNull(cursorUser.getString(2)),
+                        encryption.decryptOrNull(cursorUser.getString(3)),
+                        encryption.decryptOrNull(cursorUser.getString(4))
+                ));
+            } while (cursorUser.moveToNext());
+        }
+        cursorUser.close();
+        return userArrayList;
+    }
+
+    public int readNumberUserFromMail(String mail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorUser = db.rawQuery("SELECT * FROM user WHERE email = ?", new String[]{encryption.encryptOrNull(mail)});
+
+        ArrayList<User> userArrayList = new ArrayList<>();
+        if (cursorUser.moveToFirst()) {
+            do {
+                userResult++;
+            } while (cursorUser.moveToNext());
+        }
+        cursorUser.close();
+        return userResult;
     }
 
     public void addNewProspect(Prospect prospect) {
 
         try {
-            // on below line we are creating a variable for
-            // our sqlite database and calling writable method
-            // as we are writing data in our database.
 
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-            // on below line we are creating a
-            // variable for content values.
             ContentValues values = new ContentValues();
 
-            // on below line we are passing all values
-            // along with its key and value pair.
             values.put("nom",prospect.getNom() );
             values.put("prenom",prospect.getPrenom() );
             values.put("siret",prospect.getSiret() );
             values.put("raisonSociale",prospect.getRaisonSociale() );
             values.put("score",prospect.getScore() );
 
-            // after adding all values we are passing
-            // content values to our table.
             sqLiteDatabase.insert("prospect", null, values);
-
-            // at last we are closing our
-            // database after adding database.
             sqLiteDatabase.close();
 
         } catch (Exception e) {
