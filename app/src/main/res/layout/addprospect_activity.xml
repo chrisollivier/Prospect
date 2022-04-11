@@ -22,7 +22,8 @@
             app:layout_constraintEnd_toStartOf="@+id/BtnSiret"
             android:hint="RaisonSociale" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.103" app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintVertical_bias="0.106" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.382"/>
     <EditText
             android:layout_width="137dp"
             android:layout_height="44dp"
@@ -79,15 +80,30 @@
             android:layout_height="wrap_content" android:id="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/inputRS"
             app:layout_constraintBottom_toTopOf="@+id/inputLName" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.089"
-            app:layout_constraintVertical_bias="0.543"/>
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.094"
+            app:layout_constraintVertical_bias="0.273" android:textSize="20sp"/>
     <TextView
-            android:text="x"
-            android:layout_width="16dp"
-            android:layout_height="16dp" android:id="@+id/textView3"
+            android:text="Raison Sociale :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/inputRS"
+            app:layout_constraintBottom_toTopOf="@+id/inputLName" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.126"
+            app:layout_constraintVertical_bias="0.876" android:textSize="20sp"/>
+    <TextView
+            android:layout_width="173dp"
+            android:layout_height="29dp" android:id="@+id/siretOutput"
             app:layout_constraintStart_toEndOf="@+id/textView2" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.367" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.22"/>
+            app:layout_constraintHorizontal_bias="0.374" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.195"
+            android:textSize="16sp"/>
+    <TextView
+            android:layout_width="209dp"
+            android:layout_height="32dp" android:id="@+id/RSOutput"
+            app:layout_constraintStart_toEndOf="@+id/textView" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.384" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.258"
+            android:textSize="16sp"/>
     <Button
             android:text="Button"
             android:layout_width="wrap_content"

@@ -16,17 +16,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></Button>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="399dp"
-        android:layout_height="413dp"
+        android:layout_width="412dp"
+        android:layout_height="414dp"
 
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
@@ -38,37 +38,40 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@color/white"
+            android:background="@color/dark_grey"
             android:stretchColumns="1,2,3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             tools:context=".ItemActivity">
-
 
             <TableRow>
 
+
                 <TextView
                     android:layout_column="1"
+                    android:background="@color/grey"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="nom"
-                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_column="1"
+                    android:background="@color/grey"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="Prenom"
+                    android:textColor="@color/white"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_column="1"
+                    android:background="@color/grey"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="Raison sociale"
+                    android:textColor="@color/white"
                     android:textSize="16dp"
                     android:textStyle="bold" />
             </TableRow>
@@ -79,5 +82,6 @@
                 android:layout_height="155dp"
                 android:scrollbars="vertical" />
         </TableLayout>
+
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

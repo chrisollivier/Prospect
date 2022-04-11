@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 
             if ( user.getPassword() != null && allUser.get(0).getPassword() != null && user.getPassword().equals(allUser.get(0).getPassword())){
                 Log.d("connexion", "Connexion effectuée : " + allUser.get(0).getPassword());
-                Intent connexion = new Intent(LoginActivity.this, AddProspectActivity.class);
+                Intent connexion = new Intent(LoginActivity.this, AccueilActivity.class);
                 startActivity(connexion);
             }else{
                 InputPassword.setError("Password and username didn't match");

@@ -1,6 +1,10 @@
 package sio.nsi.prospect.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,17 +16,20 @@ import java.util.List;
 
 import sio.nsi.prospect.R;
 import sio.nsi.prospect.model.Prospect;
+import sio.nsi.prospect.model.User;
 
 public class AccueilActivity extends AppCompatActivity {
     private RecyclerView recycler_View;
     ProspectAdaptateur adaptateur;
-
+    private Button button_AddProspect;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueilactivity);
         recycler_View = (RecyclerView) findViewById(R.id.recycler_View);
         setRecyclerView();
+        button_AddProspect = (Button) findViewById(R.id.button_AddProspect);
+        button_AddProspect.setOnClickListener(addprospect);
     }
 
     private void setRecyclerView() {
@@ -39,4 +46,16 @@ public class AccueilActivity extends AppCompatActivity {
         prospect_list.add(new Prospect("Ricardo","Milos","pepeIndustry"));
         return prospect_list;
     }
-}
+
+    public View.OnClickListener addprospect = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(AccueilActivity.this, AddProspectActivity.class);
+            startActivity(intent);
+        }
+
+        };
+    };
+
+
+

@@ -35,17 +35,6 @@ public class APISiret {
         return "couldn't find data";
     }
 
-    public static String getSiretFromText(String search) throws IOException, NetworkOnMainThreadException {
-        Log.d("siret", "searching : " + search);
-        URL url = new URL(UrlAPI_RaisonSociale+search);
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
-            for (String line; (line = reader.readLine()) != null; ) {
-                return getSiretFromData(line);
-            }
-        }
-        return "couldn't find data";
-    }
-
     public static String getDataFromSiret(String search) throws IOException {
         URL url = new URL(UrlAPI_Siret+search);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
@@ -62,6 +51,32 @@ public class APISiret {
             return jsonObject.getJSONArray("etablissement").getJSONObject(0).getString("siret");
         }catch (JSONException err){
             return "couldn't find siret";
+        }
+    }
+
+    public static String getSiretFromText(String search) throws IOException, NetworkOnMainThreadException {
+        Log.d("siret", "searching : " + search);
+        URL url = new URL(UrlAPI_RaisonSociale+search);
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+            for (String line; (line = reader.readLine()) != null; ) {
+                try {
+                    JSONObject jsonObject = new JSONObject(line);
+                    return jsonObject.getJSONArray("etablissement").getJSONObject(0).getString("siret");
+                }catch (JSONException err){
+                    return "couldn't find siret";
+                }
+            }
+        }
+        return "couldn't find data";
+    }
+
+    public static String getRSFromText(String search) throws IOException {
+        String data = getDataFromSiret(search);
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("etablissement").getJSONObject(0).getString("l1_normalisee");
+        }catch (JSONException err){
+            return "couldn't find raison sociale";
         }
     }
 }
