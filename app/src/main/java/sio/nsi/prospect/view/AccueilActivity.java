@@ -43,7 +43,10 @@ public class AccueilActivity extends AppCompatActivity {
 
         ArrayList<Prospect> prospect_list= new ArrayList<>();
         prospect_list.add(new Prospect("Ricardo","Milos","pepeIndustry"));
-        prospect_list.add(new Prospect("Ricardo","Milos","pepeIndustry"));
+        prospect_list.add(new Prospect("Ricardo3","Milos","pepeIndustry"));
+        prospect_list.add(new Prospect("Ricardo2","Milos","pepeIndustry"));
+        prospect_list.add(new Prospect("Ricardo6","Milos","pepeIndustry"));
+        prospect_list.add(new Prospect("Ricardo9","Milos","pepeIndustry"));
         return prospect_list;
     }
 

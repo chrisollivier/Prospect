@@ -1,116 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent"
-                                                   android:background="@drawable/gradient_background"
->
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
 
     <Button
-            android:text="Chercher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/BtnSiret"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.892" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.099"/>
-    <EditText
-            android:layout_width="177dp"
-            android:layout_height="43dp"
-            android:inputType="text"
-            android:ems="10"
-            android:id="@+id/inputRS"
-            app:layout_constraintEnd_toStartOf="@+id/BtnSiret"
-            android:hint="RaisonSociale" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.106" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.382"/>
-    <EditText
-            android:layout_width="137dp"
-            android:layout_height="44dp"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/inputLName"
-            app:layout_constraintEnd_toStartOf="@+id/inputFName"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.336"
-            android:hint="Nom" app:layout_constraintTop_toBottomOf="@+id/inputRS"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.176"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:ems="10"
-            android:id="@+id/inputTel"
-            android:hint="Num. Téléphone" app:layout_constraintTop_toBottomOf="@+id/inputLName"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.154"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.169"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/inputMail"
-            android:hint="Adresse mail"
-            app:layout_constraintTop_toBottomOf="@+id/inputTel" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.19" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.169"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/inputNotes"
-            android:hint="Notes" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputMail" app:layout_constraintVertical_bias="0.273"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.169"/>
-    <EditText
-            android:layout_width="137dp"
-            android:layout_height="44dp"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/inputFName"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.868" android:hint="Prénom"
-            app:layout_constraintTop_toBottomOf="@+id/BtnSiret" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.175"/>
+        android:id="@+id/BtnSiret"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chercher"
+        app:layout_constraintBottom_toBottomOf="@+id/inputRS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toEndOf="@+id/inputRS"
+        app:layout_constraintTop_toTopOf="@+id/inputRS"
+        app:layout_constraintVertical_bias="1.0" />
+
     <TextView
-            android:text="Siret :"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/inputRS"
-            app:layout_constraintBottom_toTopOf="@+id/inputLName" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.094"
-            app:layout_constraintVertical_bias="0.273" android:textSize="20sp"/>
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Siret :"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/siretOutput"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inputRS"
+        app:layout_constraintTop_toBottomOf="@+id/inputRS" />
+
+    <EditText
+        android:id="@+id/inputRS"
+        android:layout_width="177dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="RaisonSociale"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/inputLName"
+        android:layout_width="137dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Nom"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/inputFName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inputRS"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/inputTel"
+        android:layout_width="343dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Num. Téléphone"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@+id/BtnSiret"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inputRS"
+        app:layout_constraintTop_toBottomOf="@+id/inputLName" />
+
+    <EditText
+        android:id="@+id/inputMail"
+        android:layout_width="341dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Adresse mail"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/BtnSiret"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inputRS"
+        app:layout_constraintTop_toBottomOf="@+id/inputTel" />
+
+    <EditText
+        android:id="@+id/inputNotes"
+        android:layout_width="341dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:hint="Notes"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/BtnSiret"
+        app:layout_constraintStart_toStartOf="@+id/inputRS"
+        app:layout_constraintTop_toBottomOf="@+id/inputMail" />
+
+    <EditText
+        android:id="@+id/inputFName"
+        android:layout_width="137dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:hint="Prénom"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/BtnSiret"
+        app:layout_constraintTop_toTopOf="@+id/inputLName" />
+
     <TextView
-            android:text="Raison Sociale :"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/inputRS"
-            app:layout_constraintBottom_toTopOf="@+id/inputLName" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.126"
-            app:layout_constraintVertical_bias="0.876" android:textSize="20sp"/>
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Raison Sociale :"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/RSOutput"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inputRS"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
     <TextView
-            android:layout_width="173dp"
-            android:layout_height="29dp" android:id="@+id/siretOutput"
-            app:layout_constraintStart_toEndOf="@+id/textView2" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.374" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.195"
-            android:textSize="16sp"/>
+        android:id="@+id/siretOutput"
+        android:layout_width="173dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="108dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/BtnSiret"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
     <TextView
-            android:layout_width="209dp"
-            android:layout_height="32dp" android:id="@+id/RSOutput"
-            app:layout_constraintStart_toEndOf="@+id/textView" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.384" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.258"
-            android:textSize="16sp"/>
+        android:id="@+id/RSOutput"
+        android:layout_width="176dp"
+        android:layout_height="28dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/BtnSiret"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
-            android:text="Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BtnSiret" app:layout_constraintVertical_bias="0.91"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/BtnSiret"
+        app:layout_constraintStart_toStartOf="@+id/inputRS" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
