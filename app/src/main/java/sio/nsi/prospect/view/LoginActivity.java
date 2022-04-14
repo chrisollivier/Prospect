@@ -5,15 +5,13 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import sio.nsi.prospect.R;
 import sio.nsi.prospect.model.User;
-import sio.nsi.prospect.tools.APIProspect;
+import sio.nsi.prospect.tools.APIUser;
 import sio.nsi.prospect.tools.DataBaseHelper;
 
 import java.io.IOException;
@@ -24,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button Btnlogin;
     private EditText InputLogin;
     private EditText InputPassword;
-    private APIProspect APIProspect;
+    private APIUser APIProspect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
