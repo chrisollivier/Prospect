@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import sio.nsi.prospect.R;
+import sio.nsi.prospect.model.Prospect;
 import sio.nsi.prospect.model.User;
+import sio.nsi.prospect.tools.APIProspect;
 import sio.nsi.prospect.tools.APIUser;
 import sio.nsi.prospect.tools.DataBaseHelper;
 
@@ -22,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button Btnlogin;
     private EditText InputLogin;
     private EditText InputPassword;
-    private APIUser APIProspect;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,42 +39,61 @@ public class LoginActivity extends AppCompatActivity {
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
         try {
-            String JsonUser = APIProspect.getAllUserApp();
+            String JsonUser = APIUser.getAllUserApp();
             System.out.println(JsonUser);
-            Log.v("Json",JsonUser);
-            Log.v("database",""+ dataBase.readNumberUserFromMail("UserAdmin"));
-            for (int i = 0; i < APIProspect.getJsonArraySize(JsonUser); i++) {
-                if (dataBase.readNumberUserFromMail(APIProspect.getAppUserMail(JsonUser,i)) == 0){
+            Log.v("Json", JsonUser);
+            Log.v("database", "" + dataBase.readNumberUserFromMail("UserAdmin"));
+            for (int i = 0; i < APIUser.getJsonArraySize(JsonUser); i++) {
+                if (dataBase.readNumberUserFromMail(APIUser.getAppUserMail(JsonUser, i)) == 0) {
                     dataBase.addNewUser(new User(
-                            APIProspect.getAppUserMail(JsonUser,i),
-                            APIProspect.getAppUserPassword(JsonUser,i),
-                            APIProspect.getAppUserNom(JsonUser,i),
-                            APIProspect.getAppUserPrenom(JsonUser,i)
+                            APIUser.getAppUserMail(JsonUser, i),
+                            APIUser.getAppUserPassword(JsonUser, i),
+                            APIUser.getAppUserNom(JsonUser, i),
+                            APIUser.getAppUserPrenom(JsonUser, i)
                     ));
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //your codes here
+
+        try {
+            String JsonProspect = APIProspect.getAllProspect();
+            for (int i = 0; i < APIProspect.getJsonArraySize(JsonProspect); i++) {
+                if (dataBase.readNumberProspectFromNomPrenomSiret(APIProspect.getProscpectNom(JsonProspect, i), APIProspect.getProscpectPrenom(JsonProspect, i), APIProspect.getProscpectSiret(JsonProspect, i)) == 0) {
+                    dataBase.addNewProspect(new Prospect(
+                            APIProspect.getProscpectId(JsonProspect, i),
+                            APIProspect.getProscpectNom(JsonProspect, i),
+                            APIProspect.getProscpectPrenom(JsonProspect, i),
+                            APIProspect.getProscpectSiret(JsonProspect, i),
+                            APIProspect.getProscpectRaisonSocial(JsonProspect, i),
+                            APIProspect.getProscpectScore(JsonProspect, i)
+                    ));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
+
     public View.OnClickListener eventBtnlogin = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
-            User user = new User(InputLogin.getText().toString(),InputPassword.getText().toString());
+            User user = new User(InputLogin.getText().toString(), InputPassword.getText().toString());
             ArrayList<User> allUser = dataBase.readUser(user);
 
             Log.d("Comparaison", "-" + allUser.get(0).getPassword() + "- vs -" + user.getPassword() + "-");
 
 
-            if ( user.getPassword() != null && allUser.get(0).getPassword() != null && user.getPassword().equals(allUser.get(0).getPassword())){
+            if (user.getPassword() != null && allUser.get(0).getPassword() != null && user.getPassword().equals(allUser.get(0).getPassword())) {
                 Log.d("connexion", "Connexion effectuée : " + allUser.get(0).getPassword());
                 Intent connexion = new Intent(LoginActivity.this, AccueilActivity.class);
                 startActivity(connexion);
-            }else{
+            } else {
                 InputPassword.setError("Password and username didn't match");
-                Log.d("Error","connection failed");
+                Log.d("Error", "connection failed");
             }
         }
     };

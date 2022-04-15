@@ -123,7 +123,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public int readNumberUserFromMail(String mail) {
         SQLiteDatabase db = this.getReadableDatabase();
-
+        userResult = 0;
         Cursor cursorUser = db.rawQuery("SELECT * FROM user WHERE email = ?", new String[]{encryption.encryptOrNull(mail)});
 
         ArrayList<User> userArrayList = new ArrayList<>();
@@ -137,17 +137,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void addNewProspect(Prospect prospect) {
-
         try {
 
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
             ContentValues values = new ContentValues();
 
-            values.put("nom",prospect.getNom() );
-            values.put("prenom",prospect.getPrenom() );
-            values.put("siret",prospect.getSiret() );
-            values.put("raisonSociale",prospect.getRaisonSociale() );
-            values.put("score",prospect.getScore() );
+
+            values.put("nom",prospect.getNom());
+            values.put("prenom",prospect.getPrenom());
+            values.put("siret",prospect.getSiret());
+            values.put("raisonSociale",prospect.getRaisonSociale());
+            values.put("score",prospect.getScore());
 
             sqLiteDatabase.insert("prospect", null, values);
             sqLiteDatabase.close();
@@ -155,25 +155,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public ArrayList<Prospect> readAllProspect() {
-        // on below line we are creating a
-        // database for reading our database.
-
         SQLiteDatabase db = this.getReadableDatabase();
-
-        // on below line we are creating a cursor with query to read data from database.
         Cursor cursorProspect = db.rawQuery("SELECT * FROM prospect",new String[]{});
-
-        // on below line we are creating a new array list.
         ArrayList<Prospect> prospectArrayList = new ArrayList<>();
-
-        // moving our cursor to first position.
         if (cursorProspect.moveToFirst()) {
             do {
-                // on below line we are adding the data from cursor to our array list.
                 prospectArrayList.add(new Prospect(
                         cursorProspect.getInt(0),
                         cursorProspect.getString(1),
@@ -183,12 +172,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         cursorProspect.getInt(5)
                 ));
             } while (cursorProspect.moveToNext());
-            // moving our cursor to next.
         }
-        // at last closing our cursor
-        // and returning our array list.
         cursorProspect.close();
         return prospectArrayList;
+    }
+
+    public int readNumberProspectFromNomPrenomSiret(String nom ,String prenom ,String siret) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        userResult = 0;
+        Cursor cursorUser = db.rawQuery("SELECT * FROM prospect WHERE nom = ? And prenom = ? And siret = ?", new String[]{nom,prenom,siret});
+
+        ArrayList<User> userArrayList = new ArrayList<>();
+        if (cursorUser.moveToFirst()) {
+            do {
+                userResult++;
+            } while (cursorUser.moveToNext());
+        }
+        cursorUser.close();
+        return userResult;
     }
 
 }
