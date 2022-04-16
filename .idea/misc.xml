@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Dev/Prospect/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3135" />
         <entry key="..\:/Dev/Prospect/app/src/main/res/drawable/gradient_background.xml" value="0.20052083333333334" />
+        <entry key="..\:/Dev/Prospect/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3135" />
+        <entry key="..\:/Dev/Prospect/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3135" />
         <entry key="..\:/Users/Mathis/Google Drive/SIO2/B2-POO/NSI/Prospect/app/src/main/res/layout/accueilactivity.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/Mathis/Google Drive/SIO2/B2-POO/NSI/Prospect/app/src/main/res/layout/addprospect_activity.xml" value="0.265625" />
         <entry key="..\:/Users/Mathis/Google Drive/SIO2/B2-POO/NSI/Prospect/app/src/main/res/layout/itemlayout.xml" value="0.23697916666666666" />

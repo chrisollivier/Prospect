@@ -1,6 +1,5 @@
 package sio.nsi.prospect.tools;
 
-import android.accounts.NetworkErrorException;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
 import org.json.JSONException;

@@ -11,16 +11,16 @@ import sio.nsi.prospect.R;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sio.nsi.prospect.model.Prospect;
 
 public class ProspectAdaptateur extends RecyclerView.Adapter<ProspectAdaptateur.ViewHolder> {
-
     Context context;
-    List<Prospect> prospect_list;
+    ArrayList<Prospect> prospect_list;
 
-    public ProspectAdaptateur(Context context, List<Prospect> prospect_list) {
+    public ProspectAdaptateur(Context context, ArrayList<Prospect> prospect_list) {
         this.context = context;
         this.prospect_list = prospect_list;
     }
@@ -48,15 +48,15 @@ public class ProspectAdaptateur extends RecyclerView.Adapter<ProspectAdaptateur.
 
     @Override
     public int getItemCount() {
-        if(prospect_list != null){
-            if (prospect_list.size()<=5){
-                return prospect_list.size();
-            }else{
-                return 5;
-            }
-        }else{
-            return 0;
-        }
+       if(prospect_list != null){
+       //     if (prospect_list.size()<=5){
+        return prospect_list.size();
+       //    }else{
+       //        return 5;
+       //    }
+       }else{
+           return 0;
+       }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
