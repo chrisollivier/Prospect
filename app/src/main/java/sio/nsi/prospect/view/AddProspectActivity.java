@@ -27,7 +27,6 @@ public class AddProspectActivity extends AppCompatActivity {
         BtnSiret = (Button) findViewById(R.id.BtnSiret);
         InputRS = (EditText) findViewById(R.id.inputRS);
         SiretOutput = (TextView) findViewById(R.id.siretOutput);
-        RSOutput = (TextView) findViewById(R.id.RSOutput);
 
         BtnSiret.setOnClickListener(eventBtnsiret);
 
