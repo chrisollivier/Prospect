@@ -16,7 +16,7 @@ public class APIProspect {
 
     public static String getAllProspect() throws IOException, NetworkOnMainThreadException {
         Log.d("siret", "searching ");
-        URL url = new URL(HTTP_ROUTS_PROSPECT+"GETAllProspect.php");
+        URL url = new URL(HTTP_ROUTS_PROSPECT+"GET/AllProspect.php");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
             for (String line; (line = reader.readLine()) != null; ) {
                 return line;
@@ -73,7 +73,7 @@ public class APIProspect {
     public static String getProscpectRaisonSocial(String data,int i) throws IOException {
         try {
             JSONObject jsonObject = new JSONObject(data);
-            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("raisonSocial");
+            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("raisonsocial");
         }catch (JSONException err){
             return "";
         }
@@ -85,6 +85,24 @@ public class APIProspect {
             return jsonObject.getJSONArray("Prospect").getJSONObject(i).getInt("score");
         }catch (JSONException err){
             return -1;
+        }
+    }
+
+    public static String getProscpectMail(String data,int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("mail");
+        }catch (JSONException err){
+            return "";
+        }
+    }
+
+    public static String getProscpectTel(String data,int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("tel");
+        }catch (JSONException err){
+            return "";
         }
     }
 

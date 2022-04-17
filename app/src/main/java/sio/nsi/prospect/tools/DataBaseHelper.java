@@ -22,13 +22,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final Encryption encryption = Encryption.getDefault(key, salt, iv);
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "NSIProspect.db", null, 6);
+        super(context, "NSIProspect.db", null, 9);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CreateTableStatementUser = "create table user( Id INTEGER PRIMARY KEY AUTOINCREMENT,email text, password text, nom TEXT, prenom TEXT);";
-        String CreateTableStatementProspect = "create table prospect(Id INTEGER primary key autoincrement,nom text,prenom text,siret text,raisonSociale text, score integer);";
+        String CreateTableStatementProspect = "create table prospect(Id INTEGER primary key autoincrement,nom text,prenom text,siret text,raisonSociale text, score integer, mail text,tel text);";
 
 
         sqLiteDatabase.execSQL(CreateTableStatementUser);
@@ -45,16 +45,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         onCreate(sqLiteDatabase);
 
-        User tempUser = new User("admin@gmail.com","yo","AdminUser","AdminUser");
-        this.addNewUser(tempUser);
-
-        Log.v("Update","Update succefull ! ");
     }
 
 
     public void addNewUser(User user) {
 
         try {
+            assert encryption != null;
             user.setEmail(encryption.encrypt(user.getEmail()));
             user.setPassword(encryption.encrypt(user.getPassword()));
             user.setNom(encryption.encrypt(user.getNom()));
@@ -77,32 +74,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<User> readAllUser() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursorUser = db.rawQuery("SELECT * FROM user", new String[]{});
-
-        ArrayList<User> userArrayList = new ArrayList<>();
-
-        if (cursorUser.moveToFirst()) {
-            do {
-                userArrayList.add(new User(
-                        cursorUser.getInt(0),
-                        encryption.decryptOrNull(cursorUser.getString(1)),
-                        encryption.decryptOrNull(cursorUser.getString(2)),
-                        encryption.decryptOrNull(cursorUser.getString(3)),
-                        encryption.decryptOrNull(cursorUser.getString(4))
-                ));
-            } while (cursorUser.moveToNext());
-        }
-        cursorUser.close();
-        return userArrayList;
-    }
-
     public ArrayList<User> readUser(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
 
+        assert encryption != null;
         Cursor cursorUser = db.rawQuery("SELECT * FROM user WHERE email = ?", new String[]{encryption.encryptOrNull(user.getEmail())});
 
         ArrayList<User> userArrayList = new ArrayList<>();
@@ -110,10 +85,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do {
                 userArrayList.add(new User(
                         cursorUser.getInt(0),
-                        encryption.decryptOrNull(cursorUser.getString(1)),
-                        encryption.decryptOrNull(cursorUser.getString(2)),
-                        encryption.decryptOrNull(cursorUser.getString(3)),
-                        encryption.decryptOrNull(cursorUser.getString(4))
+                        encryption.decryptOrNull(cursorUser.getString(1)),  //MAIL
+                        encryption.decryptOrNull(cursorUser.getString(2)),  //PASSWORD
+                        encryption.decryptOrNull(cursorUser.getString(3)),  //NOM
+                        encryption.decryptOrNull(cursorUser.getString(4))   //PRENOM
                 ));
             } while (cursorUser.moveToNext());
         }
@@ -124,9 +99,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public int readNumberUserFromMail(String mail) {
         SQLiteDatabase db = this.getReadableDatabase();
         userResult = 0;
+        assert encryption != null;
         Cursor cursorUser = db.rawQuery("SELECT * FROM user WHERE email = ?", new String[]{encryption.encryptOrNull(mail)});
 
-        ArrayList<User> userArrayList = new ArrayList<>();
         if (cursorUser.moveToFirst()) {
             do {
                 userResult++;
@@ -148,6 +123,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             values.put("siret",prospect.getSiret());
             values.put("raisonSociale",prospect.getRaisonSociale());
             values.put("score",prospect.getScore());
+            values.put("mail",prospect.getMail());
+            values.put("tel",prospect.getTel());
 
             sqLiteDatabase.insert("prospect", null, values);
             sqLiteDatabase.close();
@@ -164,12 +141,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         if (cursorProspect.moveToFirst()) {
             do {
                 prospectArrayList.add(new Prospect(
-                        cursorProspect.getInt(0),
-                        cursorProspect.getString(1),
-                        cursorProspect.getString(2),
-                        cursorProspect.getString(3),
-                        cursorProspect.getString(4),
-                        cursorProspect.getInt(5)
+                        cursorProspect.getInt(0),       //ID
+                        cursorProspect.getString(1),    //nom
+                        cursorProspect.getString(2),    //prenom
+                        cursorProspect.getString(3),    //siret
+                        cursorProspect.getString(4),    //RS
+                        cursorProspect.getInt(5),       //score
+                        cursorProspect.getString(6),    //tel
+                        cursorProspect.getString(7)     //mail
                 ));
             } while (cursorProspect.moveToNext());
         }
@@ -182,7 +161,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         userResult = 0;
         Cursor cursorUser = db.rawQuery("SELECT * FROM prospect WHERE nom = ? And prenom = ? And siret = ?", new String[]{nom,prenom,siret});
 
-        ArrayList<User> userArrayList = new ArrayList<>();
         if (cursorUser.moveToFirst()) {
             do {
                 userResult++;

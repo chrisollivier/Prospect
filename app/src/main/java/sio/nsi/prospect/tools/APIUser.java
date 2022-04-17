@@ -15,7 +15,7 @@ public class APIUser {
 
     public static String getAllUserApp() throws IOException, NetworkOnMainThreadException {
         Log.d("siret", "searching ");
-        URL url = new URL(HTTP_ROUTS_USERAPP+"GETAllUser.php");
+        URL url = new URL(HTTP_ROUTS_USERAPP+"GET/AllUser.php");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
             for (String line; (line = reader.readLine()) != null; ) {
                 return line;

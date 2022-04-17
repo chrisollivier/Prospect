@@ -29,11 +29,6 @@ public class AddProspectActivity extends AppCompatActivity {
         SiretOutput = (TextView) findViewById(R.id.siretOutput);
 
         BtnSiret.setOnClickListener(eventBtnsiret);
-
-        // Permet de désactiver les restrictions de networkonmain
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
     }
 
     public View.OnClickListener eventBtnsiret = new View.OnClickListener() {

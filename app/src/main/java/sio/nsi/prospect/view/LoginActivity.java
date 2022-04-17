@@ -40,9 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         try {
             String JsonUser = APIUser.getAllUserApp();
-            System.out.println(JsonUser);
-            Log.v("Json", JsonUser);
-            Log.v("database", "" + dataBase.readNumberUserFromMail("UserAdmin"));
             for (int i = 0; i < APIUser.getJsonArraySize(JsonUser); i++) {
                 if (dataBase.readNumberUserFromMail(APIUser.getAppUserMail(JsonUser, i)) == 0) {
                     dataBase.addNewUser(new User(
@@ -62,12 +59,13 @@ public class LoginActivity extends AppCompatActivity {
             for (int i = 0; i < APIProspect.getJsonArraySize(JsonProspect); i++) {
                 if (dataBase.readNumberProspectFromNomPrenomSiret(APIProspect.getProscpectNom(JsonProspect, i), APIProspect.getProscpectPrenom(JsonProspect, i), APIProspect.getProscpectSiret(JsonProspect, i)) == 0) {
                     dataBase.addNewProspect(new Prospect(
-                            APIProspect.getProscpectId(JsonProspect, i),
                             APIProspect.getProscpectNom(JsonProspect, i),
                             APIProspect.getProscpectPrenom(JsonProspect, i),
                             APIProspect.getProscpectSiret(JsonProspect, i),
                             APIProspect.getProscpectRaisonSocial(JsonProspect, i),
-                            APIProspect.getProscpectScore(JsonProspect, i)
+                            APIProspect.getProscpectScore(JsonProspect, i),
+                            APIProspect.getProscpectMail(JsonProspect, i),
+                            APIProspect.getProscpectTel(JsonProspect, i)
                     ));
                 }
             }
@@ -83,9 +81,6 @@ public class LoginActivity extends AppCompatActivity {
 
             User user = new User(InputLogin.getText().toString(), InputPassword.getText().toString());
             ArrayList<User> allUser = dataBase.readUser(user);
-
-            Log.d("Comparaison", "-" + allUser.get(0).getPassword() + "- vs -" + user.getPassword() + "-");
-
 
             if (user.getPassword() != null && allUser.get(0).getPassword() != null && user.getPassword().equals(allUser.get(0).getPassword())) {
                 Log.d("connexion", "Connexion effectuée : " + allUser.get(0).getPassword());

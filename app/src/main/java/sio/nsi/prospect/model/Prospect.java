@@ -7,22 +7,44 @@ public class Prospect {
     private String siret;
     private String raisonSociale;
     private int score;
+    private String mail;
+    private String tel;
 
-    public Prospect(String nom, String prenom, String siret, String raisonSociale, int score) {
+    public Prospect(String nom, String prenom, String siret, String raisonSociale, int score, String mail, String tel) {
         this.nom = nom;
         this.prenom = prenom;
         this.siret = siret;
         this.raisonSociale = raisonSociale;
         this.score = score;
+        this.mail = mail;
+        this.tel = tel;
     }
 
-    public Prospect(int id, String nom, String prenom, String siret, String raisonSociale, int score) {
-        Id = id;
+    public Prospect(int id, String nom, String prenom, String siret, String raisonSociale, int score, String mail, String tel) {
+        this.Id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.siret = siret;
         this.raisonSociale = raisonSociale;
         this.score = score;
+        this.mail = mail;
+        this.tel = tel;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     public int getId() {

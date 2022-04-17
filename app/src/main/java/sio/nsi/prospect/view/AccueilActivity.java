@@ -26,7 +26,7 @@ import sio.nsi.prospect.tools.DataBaseHelper;
 public class AccueilActivity extends AppCompatActivity {
     private RecyclerView recycler_View;
     private DataBaseHelper dataBase;
-    ProspectAdaptateur adaptateur;
+    private ProspectAdaptateur adaptateur;
     private Button button_AddProspect;
 
     @Override
