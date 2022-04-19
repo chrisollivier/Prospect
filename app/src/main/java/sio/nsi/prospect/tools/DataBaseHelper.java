@@ -22,7 +22,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final Encryption encryption = Encryption.getDefault(key, salt, iv);
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "NSIProspect.db", null, 9);
+        super(context, "NSIProspect.db", null, 10);
     }
 
     @Override
@@ -74,7 +74,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<User> readUser(User user) {
+    public ArrayList<User> readAllUser() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        assert encryption != null;
+        Cursor cursorUser = db.rawQuery("SELECT * FROM user", new String[]{});
+
+        ArrayList<User> userArrayList = new ArrayList<>();
+        if (cursorUser.moveToFirst()) {
+            do {
+                userArrayList.add(new User(
+                        cursorUser.getInt(0),
+                        encryption.decryptOrNull(cursorUser.getString(1)),  //MAIL
+                        encryption.decryptOrNull(cursorUser.getString(2)),  //PASSWORD
+                        encryption.decryptOrNull(cursorUser.getString(3)),  //NOM
+                        encryption.decryptOrNull(cursorUser.getString(4))   //PRENOM
+                ));
+            } while (cursorUser.moveToNext());
+        }
+        cursorUser.close();
+        return userArrayList;
+    }
+
+    public ArrayList<User> readUserFormUser(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         assert encryption != null;
@@ -116,7 +138,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
             ContentValues values = new ContentValues();
-
 
             values.put("nom",prospect.getNom());
             values.put("prenom",prospect.getPrenom());

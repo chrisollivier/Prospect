@@ -9,6 +9,9 @@ import android.widget.Button;
 
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import sio.nsi.prospect.R;
 import sio.nsi.prospect.model.Prospect;
 import sio.nsi.prospect.model.User;
@@ -19,7 +22,7 @@ import sio.nsi.prospect.tools.DataBaseHelper;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity{
     private DataBaseHelper dataBase;
     private Button Btnlogin;
     private EditText InputLogin;
@@ -72,6 +75,25 @@ public class LoginActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("UserApp",new JSONArray());
+            JSONObject UserJson = new JSONObject();
+            ArrayList<User> userToConvert = dataBase.readAllUser();
+            for (int i = 0; i < dataBase.readAllUser().size(); i++) {
+                UserJson.put("id",userToConvert.get(i).getId());
+                UserJson.put("email",userToConvert.get(i).getEmail());
+                UserJson.put("password",userToConvert.get(i).getPassword());
+                UserJson.put("nom","yo");
+                UserJson.put("prenom",userToConvert.get(i).getPrenom());
+                jsonBody.accumulate("UserApp",UserJson);
+            }
+            Log.d("json for POST",jsonBody.toString());
+            APIUser.PostAllUserApp(jsonBody.toString());
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -80,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             User user = new User(InputLogin.getText().toString(), InputPassword.getText().toString());
-            ArrayList<User> allUser = dataBase.readUser(user);
+            ArrayList<User> allUser = dataBase.readUserFormUser(user);
 
             if (user.getPassword() != null && allUser.get(0).getPassword() != null && user.getPassword().equals(allUser.get(0).getPassword())) {
                 Log.d("connexion", "Connexion effectuée : " + allUser.get(0).getPassword());
@@ -92,4 +114,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     };
+
+    //@Override
+    //protected void onStop() {
+    //    super.onStop();
+    //
+//
+    //}
 }

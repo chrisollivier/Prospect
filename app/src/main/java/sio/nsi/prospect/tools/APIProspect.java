@@ -1,8 +1,8 @@
 package sio.nsi.prospect.tools;
 
 import android.os.NetworkOnMainThreadException;
-import android.util.Log;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,14 +10,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class APIProspect {
     private static final String HTTP_ROUTS_PROSPECT = "http://86.207.48.28:8080/Prospect-API/backEnd/API/";
 
-    public static String getAllProspect() throws IOException, NetworkOnMainThreadException {
-        Log.d("siret", "searching ");
+    public static
+    String getAllProspect() throws IOException, NetworkOnMainThreadException {
         URL url = new URL(HTTP_ROUTS_PROSPECT+"GET/AllProspect.php");
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
             for (String line; (line = reader.readLine()) != null; ) {
                 return line;
             }
@@ -25,7 +26,8 @@ public class APIProspect {
         return "Error";
     }
 
-    public static int getJsonArraySize(String data)throws IOException{
+    public static
+    int getJsonArraySize(String data)throws IOException{
         try {
             JSONObject jsonObject = new JSONObject(data);
             return jsonObject.getJSONArray("Prospect").length();
@@ -34,7 +36,8 @@ public class APIProspect {
         }
     }
 
-    public static int getProscpectId(String data,int i) throws IOException {
+    public static
+    int getProscpectId(String data,int i) throws IOException {
         try {
             JSONObject jsonObject = new JSONObject(data);
             return jsonObject.getJSONArray("Prospect").getJSONObject(i).getInt("id");
@@ -43,7 +46,8 @@ public class APIProspect {
         }
     }
 
-    public static String getProscpectNom(String data,int i) throws IOException {
+    public static @NotNull
+    String getProscpectNom(String data, int i) throws IOException {
         try {
             JSONObject jsonObject = new JSONObject(data);
             return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("nom");
@@ -52,7 +56,8 @@ public class APIProspect {
         }
     }
 
-    public static String getProscpectPrenom(String data,int i) throws IOException {
+    public static @NotNull
+    String getProscpectPrenom(String data, int i) throws IOException {
         try {
             JSONObject jsonObject = new JSONObject(data);
             return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("prenom");
@@ -61,7 +66,8 @@ public class APIProspect {
         }
     }
 
-    public static String getProscpectSiret(String data,int i) throws IOException {
+    public static @NotNull
+    String getProscpectSiret(String data, int i) throws IOException {
         try {
             JSONObject jsonObject = new JSONObject(data);
             return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("siret");
@@ -70,7 +76,8 @@ public class APIProspect {
         }
     }
 
-    public static String getProscpectRaisonSocial(String data,int i) throws IOException {
+    public static @NotNull
+    String getProscpectRaisonSocial(String data, int i) throws IOException {
         try {
             JSONObject jsonObject = new JSONObject(data);
             return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("raisonsocial");
@@ -79,7 +86,8 @@ public class APIProspect {
         }
     }
 
-    public static int getProscpectScore(String data,int i) throws IOException {
+    public static
+    int getProscpectScore(String data,int i) throws IOException {
         try {
             JSONObject jsonObject = new JSONObject(data);
             return jsonObject.getJSONArray("Prospect").getJSONObject(i).getInt("score");
@@ -88,7 +96,8 @@ public class APIProspect {
         }
     }
 
-    public static String getProscpectMail(String data,int i) throws IOException {
+    public static @NotNull
+    String getProscpectMail(String data, int i) throws IOException {
         try {
             JSONObject jsonObject = new JSONObject(data);
             return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("mail");
@@ -97,7 +106,8 @@ public class APIProspect {
         }
     }
 
-    public static String getProscpectTel(String data,int i) throws IOException {
+    public static @NotNull
+    String getProscpectTel(String data,int i) throws IOException {
         try {
             JSONObject jsonObject = new JSONObject(data);
             return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("tel");
