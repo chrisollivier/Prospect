@@ -6,6 +6,7 @@ import android.os.NetworkOnMainThreadException;
 import android.os.StrictMode;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,12 +27,17 @@ public class AddProspectActivity extends AppCompatActivity {
     private TextView RSOutput;
     private EditText InputRS;
     private Button BtnSiret;
+<<<<<<< Updated upstream
     private EditText inputFName;
     private EditText inputLName;
     private EditText inputTel;
     private EditText inputMail;
     private EditText inputNotes;
     private Button BtnSubmit;
+=======
+    private Button back_button;
+    private Button btnLogout;
+>>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +55,29 @@ public class AddProspectActivity extends AppCompatActivity {
         inputNotes = (EditText) findViewById(R.id.inputNotes);
         BtnSubmit.setOnClickListener(eventBtnSubmit);
         BtnSiret.setOnClickListener(eventBtnsiret);
+        ImageView back_button =findViewById(R.id.back_button);
+        back_button.setOnClickListener(backbutton);
+
+        ImageView btnLogout =findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(logout);
+
     }
+
+    public View.OnClickListener backbutton = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(AddProspectActivity.this, AccueilActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    public View.OnClickListener logout = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(AddProspectActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+    };
 
     public View.OnClickListener eventBtnsiret = new View.OnClickListener() {
         @Override
