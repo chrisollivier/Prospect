@@ -14,8 +14,11 @@ import android.widget.Button;
 import org.w3c.dom.Text;
 import sio.nsi.prospect.R;
 import sio.nsi.prospect.model.Prospect;
+import sio.nsi.prospect.tools.APIProspect;
 import sio.nsi.prospect.tools.APISiret;
 import sio.nsi.prospect.tools.DataBaseHelper;
+
+import java.io.IOException;
 
 public class AddProspectActivity extends AppCompatActivity {
     private TextView SiretOutput;
@@ -36,7 +39,7 @@ public class AddProspectActivity extends AppCompatActivity {
         dataBase = new DataBaseHelper(this);
         setContentView(R.layout.addprospect_activity);
         BtnSiret = (Button) findViewById(R.id.BtnSiret);
-        BtnSubmit = (Button) findViewById(R.id.buttonSubmit);
+        BtnSubmit = (Button) findViewById(R.id.button_createProspect);
         InputRS = (EditText) findViewById(R.id.inputRS);
         SiretOutput = (TextView) findViewById(R.id.siretOutput);
         inputFName = (EditText) findViewById(R.id.inputFName);
@@ -63,7 +66,13 @@ public class AddProspectActivity extends AppCompatActivity {
     public View.OnClickListener eventBtnSubmit = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            dataBase.addNewProspect(new Prospect(inputFName.getText().toString(),inputLName.getText().toString(),SiretOutput.getText().toString(),InputRS.getText().toString(),Integer.parseInt(inputNotes.getText().toString()) ,inputMail.getText().toString(),inputTel.getText().toString()));
+            Prospect prospect = new Prospect(inputFName.getText().toString(),inputLName.getText().toString(),SiretOutput.getText().toString(),InputRS.getText().toString(),Integer.parseInt(inputNotes.getText().toString()) ,inputMail.getText().toString(),inputTel.getText().toString());
+            dataBase.addNewProspect(prospect);
+            try {
+                APIProspect.createProspect(prospect);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Intent connexion = new Intent(AddProspectActivity.this, AccueilActivity.class);
             startActivity(connexion);
         }

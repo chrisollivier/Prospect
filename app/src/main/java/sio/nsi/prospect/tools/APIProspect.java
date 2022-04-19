@@ -5,10 +5,13 @@ import android.os.NetworkOnMainThreadException;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sio.nsi.prospect.model.Prospect;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -116,4 +119,19 @@ public class APIProspect {
         }
     }
 
+    public static void createProspect(Prospect prospect) throws IOException {
+        String url = "http://86.207.48.28:8080/Prospect-API/backEnd/API/POST/OneProspect.php";
+        String data = "{\"nom\":\""+prospect.getNom()+"\",\"prenom\":\""+prospect.getPrenom()+"\",\"siret\":\""+prospect.getSiret()+"\",\"raisonsocial\":\""+prospect.getRaisonSociale()+"\",\"mail\":\""+prospect.getMail()+"\",\"tel\":\""+prospect.getTel()+"\"}";
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", "Mozilla/5.0");
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes("{\"Prospect\":[{\"id\":1,\"nom\":\"yo\",\"prenom\":\"theBrave\",\"siret\":\"14953772159654\",\"score\":4,\"raisonsocial\":\"UwU\",\"mail\":\"gorgeTheBrave69@gmail.com\",\"tel\":\"0436936900\"}]}");
+        wr.flush();
+        wr.close();
+        int responseCode = con.getResponseCode();
+    }
 }
