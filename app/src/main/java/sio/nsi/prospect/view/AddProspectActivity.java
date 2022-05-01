@@ -27,17 +27,12 @@ public class AddProspectActivity extends AppCompatActivity {
     private TextView RSOutput;
     private EditText InputRS;
     private Button BtnSiret;
-<<<<<<< Updated upstream
     private EditText inputFName;
     private EditText inputLName;
     private EditText inputTel;
     private EditText inputMail;
     private EditText inputNotes;
     private Button BtnSubmit;
-=======
-    private Button back_button;
-    private Button btnLogout;
->>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
