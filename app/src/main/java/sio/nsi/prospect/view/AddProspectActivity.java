@@ -87,7 +87,7 @@ public class AddProspectActivity extends AppCompatActivity {
             Prospect prospect = new Prospect(inputFName.getText().toString(),inputLName.getText().toString(),SiretOutput.getText().toString(),InputRS.getText().toString(),Integer.parseInt(inputNotes.getText().toString()) ,inputMail.getText().toString(),inputTel.getText().toString());
             dataBase.addNewProspect(prospect);
             try {
-                API.createProspect(prospect);
+                API.postProspect(prospect);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -33,7 +33,7 @@ public class API {
     }
 
     public static
-    void createProspect(Prospect prospect) throws IOException {
+    void postProspect(Prospect prospect) throws IOException {
         String url = "http://86.207.48.28:8080/Prospect-API/backEnd/API/POST/OneProspect.php";
         String data = "{\"nom\":\""+prospect.getNom()+"\",\"prenom\":\""+prospect.getPrenom()+"\",\"siret\":\""+prospect.getSiret()+"\",\"raisonsocial\":\""+prospect.getRaisonSociale()+"\",\"mail\":\""+prospect.getMail()+"\",\"tel\":\""+prospect.getTel()+"\"}";
         URL obj = new URL(url);

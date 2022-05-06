@@ -21,7 +21,7 @@ import sio.nsi.prospect.tools.DataBaseHelper;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
     private DataBaseHelper dataBase;
     private Button Btnlogin;
     private EditText InputLogin;
@@ -76,18 +76,18 @@ public class LoginActivity extends AppCompatActivity{
         }
         try {
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("UserApp",new JSONArray());
+            jsonBody.put("UserApp", new JSONArray());
             JSONObject UserJson = new JSONObject();
             ArrayList<User> userToConvert = dataBase.readAllUser();
             for (int i = 0; i < dataBase.readAllUser().size(); i++) {
-                UserJson.put("id",userToConvert.get(i).getId());
-                UserJson.put("email",userToConvert.get(i).getEmail());
-                UserJson.put("password",userToConvert.get(i).getPassword());
-                UserJson.put("nom","yo");
-                UserJson.put("prenom",userToConvert.get(i).getPrenom());
-                jsonBody.accumulate("UserApp",UserJson);
+                UserJson.put("id", userToConvert.get(i).getId());
+                UserJson.put("email", userToConvert.get(i).getEmail());
+                UserJson.put("password", userToConvert.get(i).getPassword());
+                UserJson.put("nom", "yo");
+                UserJson.put("prenom", userToConvert.get(i).getPrenom());
+                jsonBody.accumulate("UserApp", UserJson);
             }
-            Log.d("json for POST",jsonBody.toString());
+            Log.d("json for POST", jsonBody.toString());
             API.PostAllUserApp(jsonBody.toString());
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -102,22 +102,21 @@ public class LoginActivity extends AppCompatActivity{
 
             User user = new User(InputLogin.getText().toString(), InputPassword.getText().toString());
             ArrayList<User> allUser = dataBase.readUserFormUser(user);
-
-            if (user.getPassword() != null && allUser.get(0).getPassword() != null && user.getPassword().equals(allUser.get(0).getPassword())) {
-                Log.d("connexion", "Connexion effectuée : " + allUser.get(0).getPassword());
-                Intent connexion = new Intent(LoginActivity.this, AccueilActivity.class);
-                startActivity(connexion);
-            } else {
+            try {
+                if (user.getPassword() != null && allUser.get(0).getPassword() != null && user.getPassword().equals(allUser.get(0).getPassword())) {
+                    Log.d("connexion", "Connexion effectuée : " + allUser.get(0).getPassword());
+                    Intent connexion = new Intent(LoginActivity.this, AccueilActivity.class);
+                    startActivity(connexion);
+                } else {
+                    InputPassword.setError("Password and username didn't match");
+                    Log.d("Error", "connection failed");
+                }
+            } catch (Exception e) {
+                Log.d("Error", "connection failed" + e);
                 InputPassword.setError("Password and username didn't match");
-                Log.d("Error", "connection failed");
             }
+
         }
     };
 
-    //@Override
-    //protected void onStop() {
-    //    super.onStop();
-    //
-//
-    //}
 }
