@@ -1,11 +1,18 @@
 package sio.nsi.prospect.model;
 
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.IOException;
+
 public class User {
     private int Id;
     private String email;
     private String password;
     private String nom;
     private String prenom;
+
+    //constructor
 
     public User(String email,String password) {
         this.email = email;
@@ -26,6 +33,60 @@ public class User {
         this.nom = nom;
         this.prenom = prenom;
     }
+
+    //Methode
+
+    public static
+    int getJsonArraySize(String data)throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("UserApp").length();
+        }catch (JSONException err){
+            return 0;
+        }
+    }
+
+    public static @NotNull
+    String getAppUserMail(String data, int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("UserApp").getJSONObject(i).getString("email");
+        }catch (JSONException err){
+            return "";
+        }
+    }
+
+    public static @NotNull
+    String getAppUserPassword(String data, int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("UserApp").getJSONObject(i).getString("password");
+        }catch (JSONException err){
+            return "";
+        }
+    }
+
+    public static @NotNull
+    String getAppUserNom(String data, int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("UserApp").getJSONObject(i).getString("nom");
+        }catch (JSONException err){
+            return "";
+        }
+    }
+
+    public static @NotNull
+    String getAppUserPrenom(String data, int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("UserApp").getJSONObject(i).getString("prenom");
+        }catch (JSONException err){
+            return "";
+        }
+    }
+
+    //Getter And Setter
 
     public int getId() {
         return Id;

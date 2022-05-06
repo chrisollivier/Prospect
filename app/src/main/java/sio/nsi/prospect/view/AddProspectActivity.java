@@ -2,8 +2,6 @@ package sio.nsi.prospect.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.NetworkOnMainThreadException;
-import android.os.StrictMode;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,11 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.Button;
-import org.w3c.dom.Text;
 import sio.nsi.prospect.R;
 import sio.nsi.prospect.model.Prospect;
-import sio.nsi.prospect.tools.APIProspect;
-import sio.nsi.prospect.tools.APISiret;
+import sio.nsi.prospect.tools.API;
 import sio.nsi.prospect.tools.DataBaseHelper;
 
 import java.io.IOException;
@@ -79,8 +75,7 @@ public class AddProspectActivity extends AppCompatActivity {
         public void onClick(View v) {
             Log.d("button", "Siret search button clicked");
             try {
-                SiretOutput.setText(APISiret.getSiretFromText(InputRS.getText().toString()));
-                RSOutput.setText(APISiret.getRSFromText(InputRS.getText().toString()));
+                SiretOutput.setText(API.getSiretFromText(InputRS.getText().toString()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -92,7 +87,7 @@ public class AddProspectActivity extends AppCompatActivity {
             Prospect prospect = new Prospect(inputFName.getText().toString(),inputLName.getText().toString(),SiretOutput.getText().toString(),InputRS.getText().toString(),Integer.parseInt(inputNotes.getText().toString()) ,inputMail.getText().toString(),inputTel.getText().toString());
             dataBase.addNewProspect(prospect);
             try {
-                APIProspect.createProspect(prospect);
+                API.createProspect(prospect);
             } catch (IOException e) {
                 e.printStackTrace();
             }

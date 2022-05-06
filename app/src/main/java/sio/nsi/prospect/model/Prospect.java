@@ -1,5 +1,11 @@
 package sio.nsi.prospect.model;
 
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 public class Prospect {
     private int Id;
     private String nom;
@@ -9,6 +15,8 @@ public class Prospect {
     private int score;
     private String mail;
     private String tel;
+
+    //Constructor
 
     public Prospect(String nom, String prenom, String siret, String raisonSociale, int score, String mail, String tel) {
         this.nom = nom;
@@ -30,6 +38,100 @@ public class Prospect {
         this.mail = mail;
         this.tel = tel;
     }
+
+    //Methode
+
+    public static
+    int getJsonArraySize(String data)throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("Prospect").length();
+        }catch (JSONException err){
+            return 0;
+        }
+    }
+
+    public static
+    int getProscpectId(String data,int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getInt("id");
+        }catch (JSONException err){
+            return 0;
+        }
+    }
+
+    public static @NotNull
+    String getProscpectNom(String data, int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("nom");
+        }catch (JSONException err){
+            return "";
+        }
+    }
+
+    public static @NotNull
+    String getProscpectPrenom(String data, int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("prenom");
+        }catch (JSONException err){
+            return "";
+        }
+    }
+
+    public static @NotNull
+    String getProscpectSiret(String data, int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("siret");
+        }catch (JSONException err){
+            return "";
+        }
+    }
+
+    public static @NotNull
+    String getProscpectRaisonSocial(String data, int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("raisonsocial");
+        }catch (JSONException err){
+            return "";
+        }
+    }
+
+    public static
+    int getProscpectScore(String data,int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getInt("score");
+        }catch (JSONException err){
+            return -1;
+        }
+    }
+
+    public static @NotNull
+    String getProscpectMail(String data, int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("mail");
+        }catch (JSONException err){
+            return "";
+        }
+    }
+
+    public static @NotNull
+    String getProscpectTel(String data,int i) throws IOException {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            return jsonObject.getJSONArray("Prospect").getJSONObject(i).getString("tel");
+        }catch (JSONException err){
+            return "";
+        }
+    }
+
+    //Getter And Setter
 
     public String getMail() {
         return mail;

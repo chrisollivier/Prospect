@@ -15,8 +15,7 @@ import org.json.JSONObject;
 import sio.nsi.prospect.R;
 import sio.nsi.prospect.model.Prospect;
 import sio.nsi.prospect.model.User;
-import sio.nsi.prospect.tools.APIProspect;
-import sio.nsi.prospect.tools.APIUser;
+import sio.nsi.prospect.tools.API;
 import sio.nsi.prospect.tools.DataBaseHelper;
 
 import java.io.IOException;
@@ -42,14 +41,14 @@ public class LoginActivity extends AppCompatActivity{
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
         try {
-            String JsonUser = APIUser.getAllUserApp();
-            for (int i = 0; i < APIUser.getJsonArraySize(JsonUser); i++) {
-                if (dataBase.readNumberUserFromMail(APIUser.getAppUserMail(JsonUser, i)) == 0) {
+            String JsonUser = API.getAllUserApp();
+            for (int i = 0; i < User.getJsonArraySize(JsonUser); i++) {
+                if (dataBase.readNumberUserFromMail(User.getAppUserMail(JsonUser, i)) == 0) {
                     dataBase.addNewUser(new User(
-                            APIUser.getAppUserMail(JsonUser, i),
-                            APIUser.getAppUserPassword(JsonUser, i),
-                            APIUser.getAppUserNom(JsonUser, i),
-                            APIUser.getAppUserPrenom(JsonUser, i)
+                            User.getAppUserMail(JsonUser, i),
+                            User.getAppUserPassword(JsonUser, i),
+                            User.getAppUserNom(JsonUser, i),
+                            User.getAppUserPrenom(JsonUser, i)
                     ));
                 }
             }
@@ -58,17 +57,17 @@ public class LoginActivity extends AppCompatActivity{
         }
 
         try {
-            String JsonProspect = APIProspect.getAllProspect();
-            for (int i = 0; i < APIProspect.getJsonArraySize(JsonProspect); i++) {
-                if (dataBase.readNumberProspectFromNomPrenomSiret(APIProspect.getProscpectNom(JsonProspect, i), APIProspect.getProscpectPrenom(JsonProspect, i), APIProspect.getProscpectSiret(JsonProspect, i)) == 0) {
+            String JsonProspect = API.getAllProspect();
+            for (int i = 0; i < Prospect.getJsonArraySize(JsonProspect); i++) {
+                if (dataBase.readNumberProspectFromNomPrenomSiret(Prospect.getProscpectNom(JsonProspect, i), Prospect.getProscpectPrenom(JsonProspect, i), Prospect.getProscpectSiret(JsonProspect, i)) == 0) {
                     dataBase.addNewProspect(new Prospect(
-                            APIProspect.getProscpectNom(JsonProspect, i),
-                            APIProspect.getProscpectPrenom(JsonProspect, i),
-                            APIProspect.getProscpectSiret(JsonProspect, i),
-                            APIProspect.getProscpectRaisonSocial(JsonProspect, i),
-                            APIProspect.getProscpectScore(JsonProspect, i),
-                            APIProspect.getProscpectMail(JsonProspect, i),
-                            APIProspect.getProscpectTel(JsonProspect, i)
+                            Prospect.getProscpectNom(JsonProspect, i),
+                            Prospect.getProscpectPrenom(JsonProspect, i),
+                            Prospect.getProscpectSiret(JsonProspect, i),
+                            Prospect.getProscpectRaisonSocial(JsonProspect, i),
+                            Prospect.getProscpectScore(JsonProspect, i),
+                            Prospect.getProscpectMail(JsonProspect, i),
+                            Prospect.getProscpectTel(JsonProspect, i)
                     ));
                 }
             }
@@ -89,7 +88,7 @@ public class LoginActivity extends AppCompatActivity{
                 jsonBody.accumulate("UserApp",UserJson);
             }
             Log.d("json for POST",jsonBody.toString());
-            APIUser.PostAllUserApp(jsonBody.toString());
+            API.PostAllUserApp(jsonBody.toString());
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
