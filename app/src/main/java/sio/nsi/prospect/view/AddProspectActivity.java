@@ -29,7 +29,8 @@ public class AddProspectActivity extends AppCompatActivity {
     private EditText inputMail;
     private EditText inputNotes;
     private Button BtnSubmit;
-
+    private Button back_button;
+    private Button btnLogout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
