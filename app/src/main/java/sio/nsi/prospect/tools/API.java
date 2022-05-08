@@ -21,6 +21,12 @@ public class API {
 
     //API Prospect
 
+    /*
+     * Récupérer tous les prospects
+     * @return String
+     * @throws IOException
+     * @throws NetworkOnMainThreadException
+     */
     public static
     String getAllProspect() throws IOException, NetworkOnMainThreadException {
         URL url = new URL(HTTP_ROUTS_PROSPECT+"GET/AllProspect.php");
@@ -31,6 +37,7 @@ public class API {
         }
         return "Error";
     }
+
 
     public static
     int postProspect(String jsonBody) throws IOException {
@@ -77,9 +84,11 @@ public class API {
 
     //API SIRET
 
-    public static String getDataFromText(String search) throws IOException, NetworkOnMainThreadException {
-        Log.d("siret", "searching : " + search);
-        URL url = new URL(HTTP_ROUTS_RAISONSOCIALE+search);
+    public static String getDataFromRS(String RS) throws IOException, NetworkOnMainThreadException {
+        RS = RS.replaceAll(" ", "_").toLowerCase();
+        Log.d("siret", "searching : " + RS);
+        URL url = new URL(HTTP_ROUTS_RAISONSOCIALE+RS);
+        System.out.println("url : " + url);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
             for (String line; (line = reader.readLine()) != null; ) {
                 return line;
@@ -88,8 +97,8 @@ public class API {
         return "couldn't find data";
     }
 
-    public static String getSiretFromText(String search) throws IOException, NetworkOnMainThreadException {
-        String data = getDataFromText(search);
+    public static String getSiretFromRS(String RS) throws IOException, NetworkOnMainThreadException {
+        String data = getDataFromRS(RS);
         try {
             JSONObject jsonObject = new JSONObject(data);
             return jsonObject.getJSONArray("etablissement").getJSONObject(0).getString("siret");

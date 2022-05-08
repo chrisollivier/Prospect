@@ -70,7 +70,7 @@ public class AddProspectActivity extends AppCompatActivity {
         public void onClick(View view) {
             String siret = "";
             try {
-                siret = API.getSiretFromText(InputRaisonSocial.getText().toString());
+                siret = API.getSiretFromRS(InputRaisonSocial.getText().toString());
             }catch (Exception e){
 
             }
