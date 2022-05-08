@@ -26,7 +26,7 @@ public class API {
      * @return String
      * @throws IOException
      * @throws NetworkOnMainThreadException
-     */
+    */
     public static
     String getAllProspect() throws IOException, NetworkOnMainThreadException {
         URL url = new URL(HTTP_ROUTS_PROSPECT+"GET/AllProspect.php");
@@ -38,7 +38,11 @@ public class API {
         return "Error";
     }
 
-
+    /*
+     * Ajout d'un prospect
+     * @return String
+     * @throws IOException
+    */
     public static
     int postProspect(String jsonBody) throws IOException {
         URL obj = new URL(HTTP_ROUTS_PROSPECT + "POST/OneProspect.php");
@@ -56,6 +60,12 @@ public class API {
 
     //API USER
 
+    /*
+     * Récupérer tous les utilisateurs sous forme de JSON
+     * @return String
+     * @throws IOException
+     * @throws NetworkOnMainThreadException
+    */
     public static
     String getAllUserApp() throws IOException, NetworkOnMainThreadException {
         URL url = new URL(HTTP_ROUTS_USERAPP+"GET/AllUser.php");
@@ -67,6 +77,11 @@ public class API {
         return "Error";
     }
 
+    /*
+     * Ajout d'un utilisateur
+     * @return String
+     * @throws IOException
+     */
     public static
     int postUser(String jsonBody) throws IOException {
         URL obj = new URL(HTTP_ROUTS_PROSPECT + "POST/OneUser.php");
@@ -84,6 +99,10 @@ public class API {
 
     //API SIRET
 
+    /*
+     * Récupérer la data de l'api depuis la raison sociale
+     * @return String
+     */
     public static String getDataFromRS(String RS) throws IOException, NetworkOnMainThreadException {
         RS = RS.replaceAll(" ", "_").toLowerCase();
         Log.d("siret", "searching : " + RS);
@@ -97,6 +116,12 @@ public class API {
         return "couldn't find data";
     }
 
+    /*
+     * Récupérer le siret depuis la raison sociale
+     * @return String
+     * @throws IOException
+     * @throws NetworkOnMainThreadException
+     */
     public static String getSiretFromRS(String RS) throws IOException, NetworkOnMainThreadException {
         String data = getDataFromRS(RS);
         try {

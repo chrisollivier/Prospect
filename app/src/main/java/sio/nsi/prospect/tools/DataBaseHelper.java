@@ -48,6 +48,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
+    /*
+     * Ajout d'un utilisateur
+     * @param user
+     */
     public void addNewUser(User user) {
 
         try {
@@ -74,6 +78,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /*
+     * Lecture de tous les utilisateurs
+     * @return ArrayList<User>
+     */
     public ArrayList<User> readAllUser() {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -96,6 +104,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return userArrayList;
     }
 
+    /*
+     * Lecture des data d'un utilisateur
+     * @param user
+     * @return ArrayList<User>
+    */
     public ArrayList<User> readUserFormUser(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -118,6 +131,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return userArrayList;
     }
 
+    /*
+     * Check si un utilisateur existe
+     * @param String email
+     * @return int
+    */
     public int readNumberUserFromMail(String mail) {
         SQLiteDatabase db = this.getReadableDatabase();
         userResult = 0;
@@ -133,6 +151,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return userResult;
     }
 
+    /*
+     * Ajout d'un prospect
+     * @param prospect
+    */
     public void addNewProspect(Prospect prospect) {
         try {
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -154,6 +176,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /*
+     * Lecture de tous les prospects
+     * @return ArrayList<Prospect>
+     */
     public ArrayList<Prospect> readAllProspect() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursorProspect = db.rawQuery("SELECT * FROM prospect",new String[]{});
@@ -176,6 +202,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return prospectArrayList;
     }
 
+    /*
+    * Check si un prospect existe depuis son nom, prénom et Siret
+    * @param String nom, String prenom, String siret
+    * @return int
+     */
     public int readNumberProspectFromNomPrenomSiret(String nom ,String prenom ,String siret) {
         SQLiteDatabase db = this.getReadableDatabase();
         userResult = 0;
