@@ -9,6 +9,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import sio.nsi.prospect.model.Prospect;
 import sio.nsi.prospect.model.User;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -22,14 +24,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final Encryption encryption = Encryption.getDefault(key, salt, iv);
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "NSIProspect.db", null, 10);
+        super(context, "NSIProspect.db", null, 14);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CreateTableStatementUser = "create table user( Id INTEGER PRIMARY KEY AUTOINCREMENT,email text, password text, nom TEXT, prenom TEXT);";
         String CreateTableStatementProspect = "create table prospect(Id INTEGER primary key autoincrement,nom text,prenom text,siret text,raisonSociale text, score integer, mail text,tel text);";
-
 
         sqLiteDatabase.execSQL(CreateTableStatementUser);
         sqLiteDatabase.execSQL(CreateTableStatementProspect);
@@ -44,7 +45,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(CreateTableStatementDeleteProspect);
 
         onCreate(sqLiteDatabase);
-
     }
 
 
@@ -135,7 +135,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void addNewProspect(Prospect prospect) {
         try {
-
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
             ContentValues values = new ContentValues();
 
@@ -190,5 +189,4 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursorUser.close();
         return userResult;
     }
-
 }

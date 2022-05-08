@@ -1,89 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/gradient_background">
-    <include layout="@layout/toolbar" android:id="@+id/toolbar" />
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_background">
 
-    <Button
-        android:id="@+id/button_AddProspect"
-        android:layout_width="155dp"
-        android:layout_height="57dp"
-        android:background="@drawable/buttonshape"
-        android:text="Ajouter un prospect"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+    <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="412dp"
-        android:layout_height="430dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+    <Button android:id="@+id/button_AddProspect"
+            android:layout_width="155dp"
+            android:layout_height="57dp"
+            android:background="@drawable/buttonshape"
+            android:text="@string/ajouter_un_prospect"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.125"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"/>
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/dark_grey"
-            android:stretchColumns="1,2,3"
-            tools:context=".ItemActivity">
+    <RelativeLayout android:id="@+id/relativeLayout"
+                    android:layout_width="412dp"
+                    android:layout_height="430dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintVertical_bias="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent">
+
+        <TableLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_marginStart="8dp"
+                     android:layout_marginTop="8dp"
+                     android:layout_marginEnd="8dp"
+                     android:layout_marginBottom="8dp"
+                     android:background="@color/dark_grey"
+                     android:stretchColumns="1,2,3"
+                     tools:context=".ItemActivity">
 
             <TableRow>
+                <TextView android:layout_column="1"
+                          android:background="@color/grey"
+                          android:gravity="center"
+                          android:padding="10dp"
+                          android:text="@string/nom"
+                          android:textColor="@color/white"
+                          android:textSize="16sp"
+                          android:textStyle="bold"/>
 
+                <TextView android:layout_column="1"
+                          android:background="@color/grey"
+                          android:gravity="center"
+                          android:padding="10dp"
+                          android:text="@string/prenom"
+                          android:textColor="@color/white"
+                          android:textSize="16dp"
+                          android:textStyle="bold"/>
 
-                <TextView
-                    android:layout_column="1"
-                    android:background="@color/grey"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="nom"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_column="1"
-                    android:background="@color/grey"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Prenom"
-                    android:textColor="@color/white"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_column="1"
-                    android:background="@color/grey"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Raison sociale"
-                    android:textColor="@color/white"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                <TextView android:layout_column="1"
+                          android:background="@color/grey"
+                          android:gravity="center"
+                          android:padding="10dp"
+                          android:text="@string/raison_sociale"
+                          android:textColor="@color/white"
+                          android:textSize="16dp"
+                          android:textStyle="bold"/>
             </TableRow>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_View"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                    android:id="@+id/recycler_View"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
             </androidx.recyclerview.widget.RecyclerView>
         </TableLayout>
-
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

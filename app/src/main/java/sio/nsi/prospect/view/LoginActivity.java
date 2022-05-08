@@ -23,23 +23,57 @@ import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
     private DataBaseHelper dataBase;
-    private Button Btnlogin;
     private EditText InputLogin;
     private EditText InputPassword;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dataBase = new DataBaseHelper(this);
         setContentView(R.layout.loginactivity);
+        dataBase = new DataBaseHelper(this);
         InputLogin = (EditText) findViewById(R.id.inputLogin);
         InputPassword = (EditText) findViewById(R.id.inputPassword);
-        Btnlogin = (Button) findViewById(R.id.BtnLogin);
-        Btnlogin.setOnClickListener(eventBtnlogin);
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
+        Button btnLogin = (Button) findViewById(R.id.BtnLogin);
+        btnLogin.setOnClickListener(eventBtnLogin);
+        Button btnSignIn = findViewById(R.id.BtnSignIn);
+        btnSignIn.setOnClickListener(eventBtnSignIn);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        Log.v("API Status","" + getAllDataFromAPI());
+    }
+
+    public View.OnClickListener eventBtnLogin = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            User user = new User(InputLogin.getText().toString(), InputPassword.getText().toString());
+            ArrayList<User> allUser = dataBase.readUserFormUser(user);
+            try {
+                if (user.getPassword() != null && allUser.get(0).getPassword() != null && user.getPassword().equals(allUser.get(0).getPassword())) {
+                    Log.v("connexion", "Connexion effectuée : " + allUser.get(0).getPassword());
+                    Intent connexion = new Intent(LoginActivity.this, AccueilActivity.class);
+                    startActivity(connexion);
+                } else {
+                    InputPassword.setError("Password and username didn't match");
+                    Log.v("Error", "connection failed");
+                }
+            } catch (Exception e) {
+                Log.v("Error", "connection failed" + e);
+                InputPassword.setError("Password and username didn't match");
+            }
+
+        }
+    };
+
+    public View.OnClickListener eventBtnSignIn = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent connexion = new Intent(LoginActivity.this, SignInActivity.class);
+            startActivity(connexion);
+        }
+    };
+
+    private boolean getAllDataFromAPI(){
         try {
             String JsonUser = API.getAllUserApp();
             for (int i = 0; i < User.getJsonArraySize(JsonUser); i++) {
@@ -52,11 +86,6 @@ public class LoginActivity extends AppCompatActivity {
                     ));
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
             String JsonProspect = API.getAllProspect();
             for (int i = 0; i < Prospect.getJsonArraySize(JsonProspect); i++) {
                 if (dataBase.readNumberProspectFromNomPrenomSiret(Prospect.getProscpectNom(JsonProspect, i), Prospect.getProscpectPrenom(JsonProspect, i), Prospect.getProscpectSiret(JsonProspect, i)) == 0) {
@@ -71,52 +100,10 @@ public class LoginActivity extends AppCompatActivity {
                     ));
                 }
             }
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
-        try {
-            JSONObject jsonBody = new JSONObject();
-            jsonBody.put("UserApp", new JSONArray());
-            JSONObject UserJson = new JSONObject();
-            ArrayList<User> userToConvert = dataBase.readAllUser();
-            for (int i = 0; i < dataBase.readAllUser().size(); i++) {
-                UserJson.put("id", userToConvert.get(i).getId());
-                UserJson.put("email", userToConvert.get(i).getEmail());
-                UserJson.put("password", userToConvert.get(i).getPassword());
-                UserJson.put("nom", "yo");
-                UserJson.put("prenom", userToConvert.get(i).getPrenom());
-                jsonBody.accumulate("UserApp", UserJson);
-            }
-            Log.d("json for POST", jsonBody.toString());
-            API.PostAllUserApp(jsonBody.toString());
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
-
-
     }
-
-    public View.OnClickListener eventBtnlogin = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            User user = new User(InputLogin.getText().toString(), InputPassword.getText().toString());
-            ArrayList<User> allUser = dataBase.readUserFormUser(user);
-            try {
-                if (user.getPassword() != null && allUser.get(0).getPassword() != null && user.getPassword().equals(allUser.get(0).getPassword())) {
-                    Log.d("connexion", "Connexion effectuée : " + allUser.get(0).getPassword());
-                    Intent connexion = new Intent(LoginActivity.this, AccueilActivity.class);
-                    startActivity(connexion);
-                } else {
-                    InputPassword.setError("Password and username didn't match");
-                    Log.d("Error", "connection failed");
-                }
-            } catch (Exception e) {
-                Log.d("Error", "connection failed" + e);
-                InputPassword.setError("Password and username didn't match");
-            }
-
-        }
-    };
-
 }

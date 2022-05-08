@@ -33,20 +33,18 @@ public class API {
     }
 
     public static
-    void postProspect(Prospect prospect) throws IOException {
-        String url = "http://86.207.48.28:8080/Prospect-API/backEnd/API/POST/OneProspect.php";
-        String data = "{\"nom\":\""+prospect.getNom()+"\",\"prenom\":\""+prospect.getPrenom()+"\",\"siret\":\""+prospect.getSiret()+"\",\"raisonsocial\":\""+prospect.getRaisonSociale()+"\",\"mail\":\""+prospect.getMail()+"\",\"tel\":\""+prospect.getTel()+"\"}";
-        URL obj = new URL(url);
+    int postProspect(String jsonBody) throws IOException {
+        URL obj = new URL(HTTP_ROUTS_PROSPECT + "POST/OneProspect.php");
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
         con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes("{\"Prospect\":[{\"id\":1,\"nom\":\"yo\",\"prenom\":\"theBrave\",\"siret\":\"14953772159654\",\"score\":4,\"raisonsocial\":\"UwU\",\"mail\":\"gorgeTheBrave69@gmail.com\",\"tel\":\"0436936900\"}]}");
+        wr.writeBytes(jsonBody);
         wr.flush();
         wr.close();
-        int responseCode = con.getResponseCode();
+        return con.getResponseCode();
     }
 
     //API USER
@@ -62,30 +60,19 @@ public class API {
         return "Error";
     }
 
-    public static void PostAllUserApp(String body) throws IOException, NetworkOnMainThreadException{
-        // URL url = new URL ();
-        // HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        // con.setRequestMethod("POST");
-        // con.setRequestProperty("Content-Type", "application/json; utf-8");
-        // con.setRequestProperty("Accept", "application/json");
-        // con.setDoOutput(true);
-        // try(OutputStream os = con.getOutputStream()) {
-        //     byte[] input = body.getBytes("utf-8");
-        //     os.write(input, 0, input.length);
-        // }
-        // con.connect();
-
-        // URL url = new URL(HTTP_ROUTS_USERAPP+"POST/OneUser.php");
-        // HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        // conn.setConnectTimeout(5000);
-        // conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-        // conn.setDoOutput(true);
-        // conn.setDoInput(true);
-        // conn.setRequestMethod("POST");
-
-        // OutputStream os = conn.getOutputStream();
-        // os.write("{\"UserApp\":[{\"id\":1,\"email\":\"UserAdmin\",\"password\":\"UserAdmin\",\"nom\":\"yo\",\"prenom\":\"UserAdmin\"}]}".getBytes("UTF-8"));
-        // os.close();
+    public static
+    int postUser(String jsonBody) throws IOException {
+        URL obj = new URL(HTTP_ROUTS_PROSPECT + "POST/OneUser.php");
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", "Mozilla/5.0");
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(jsonBody);
+        wr.flush();
+        wr.close();
+        return con.getResponseCode();
     }
 
     //API SIRET
