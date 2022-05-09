@@ -20,7 +20,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String salt = "YourSalt";
     private static final byte[] iv = new byte[16];
     private static int userResult = 0;
-
     private static final Encryption encryption = Encryption.getDefault(key, salt, iv);
 
     public DataBaseHelper(@Nullable Context context) {
@@ -53,7 +52,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      * @param user
      */
     public void addNewUser(User user) {
-
         try {
             assert encryption != null;
             user.setEmail(encryption.encrypt(user.getEmail()));
@@ -84,7 +82,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      */
     public ArrayList<User> readAllUser() {
         SQLiteDatabase db = this.getReadableDatabase();
-
         assert encryption != null;
         Cursor cursorUser = db.rawQuery("SELECT * FROM user", new String[]{});
 

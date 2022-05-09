@@ -22,11 +22,7 @@ import java.util.ArrayList;
 
 public class AddProspectActivity extends AppCompatActivity {
     private DataBaseHelper dataBase;
-    private EditText InputRaisonSocial;
-    private EditText InputPrenom;
-    private EditText InputNom;
-    private EditText InputTel;
-    private EditText InputMail;
+    private EditText InputRaisonSocial, InputPrenom, InputNom, InputTel, InputMail;
     private RatingBar InputStarRating;
 
     @Override

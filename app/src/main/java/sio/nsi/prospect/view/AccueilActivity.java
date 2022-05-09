@@ -19,11 +19,7 @@ public class AccueilActivity extends AppCompatActivity {
     private RecyclerView recycler_View;
     private DataBaseHelper dataBase;
     private ProspectAdaptateur adaptateur;
-    private Button button_AddProspect;
-    private Button back_button;
-    private Button btnLogout;
-
-
+    private Button button_AddProspect, back_button, btnLogout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

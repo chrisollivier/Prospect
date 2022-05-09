@@ -23,8 +23,7 @@ import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
     private DataBaseHelper dataBase;
-    private EditText InputLogin;
-    private EditText InputPassword;
+    private EditText InputLogin, InputPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

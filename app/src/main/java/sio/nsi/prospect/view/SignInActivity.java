@@ -2,7 +2,6 @@ package sio.nsi.prospect.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,16 +16,10 @@ import sio.nsi.prospect.model.User;
 import sio.nsi.prospect.tools.API;
 import sio.nsi.prospect.tools.DataBaseHelper;
 import java.io.IOException;
-import java.util.ArrayList;
-
 
 public class SignInActivity extends AppCompatActivity {
     private DataBaseHelper dataBase;
-    private EditText InputLogin;
-    private EditText InputPassword;
-    private EditText InputLName;
-    private EditText InputFName;
-
+    private EditText InputLogin, InputPassword, InputLName, InputFName;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +31,7 @@ public class SignInActivity extends AppCompatActivity {
         InputFName = (EditText) findViewById(R.id.inputFName);
         Button btnCreate = findViewById(R.id.BtnCreate);
         btnCreate.setOnClickListener(eventBtnCreated);
-        Button btnBackLogin = (Button) findViewById(R.id.BtnBackLogin);
+        Button btnBackLogin = findViewById(R.id.BtnBackLogin);
         btnBackLogin.setOnClickListener(eventBtnBackLogin);
     }
 
@@ -46,12 +39,7 @@ public class SignInActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (!SignInActivity.isEmpty(InputFName)&&!SignInActivity.isEmpty(InputLName)&&!SignInActivity.isEmpty(InputLogin)&&!SignInActivity.isEmpty(InputPassword)) {
-                dataBase.addNewUser(new User(
-                        InputLogin.getText().toString(),
-                        InputPassword.getText().toString(),
-                        InputFName.getText().toString(),
-                        InputLName.getText().toString()
-                ));
+                dataBase.addNewUser(new User(InputLogin.getText().toString(), InputPassword.getText().toString(), InputFName.getText().toString(), InputLName.getText().toString()));
                 try {
                     JSONObject jsonBody = new JSONObject();
                     jsonBody.put("UserApp", new JSONArray());
