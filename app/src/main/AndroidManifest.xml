@@ -21,6 +21,7 @@
         <activity android:name=".view.SignInActivity" android:exported="true"/>
         <activity android:name=".view.AccueilActivity" android:exported="true"/>
         <activity android:name=".view.AddProspectActivity" android:exported="true"/>
+        <activity android:name=".view.DisplayProspectActivity" android:exported="true"/>
     </application>
 
 </manifest>

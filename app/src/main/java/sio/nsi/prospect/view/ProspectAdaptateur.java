@@ -18,18 +18,20 @@ import sio.nsi.prospect.model.Prospect;
 
 public class ProspectAdaptateur extends RecyclerView.Adapter<ProspectAdaptateur.ViewHolder> {
     Context context;
-    ArrayList<Prospect> prospect_list;
+    ArrayList<Prospect> prospect_list = new ArrayList<>();
+    private OnProspectListener onProspectListener;
 
-    public ProspectAdaptateur(Context context, ArrayList<Prospect> prospect_list) {
+    public ProspectAdaptateur(Context context, ArrayList<Prospect> prospect_list, OnProspectListener onProspectListener ) {
         this.context = context;
         this.prospect_list = prospect_list;
+        this.onProspectListener =onProspectListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemlayout, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, onProspectListener);
     }
 
     @Override
@@ -51,15 +53,27 @@ public class ProspectAdaptateur extends RecyclerView.Adapter<ProspectAdaptateur.
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView nom_TV, prenom_TV, raisonSocial_TV;
+        OnProspectListener onProspectListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnProspectListener onProspectListener) {
             super(itemView);
             nom_TV = itemView.findViewById(R.id.nom_TV);
             prenom_TV = itemView.findViewById(R.id.prenom_TV);
             raisonSocial_TV = itemView.findViewById(R.id.raisonSocial_TV);
+            this.onProspectListener = onProspectListener;
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onProspectListener.onProspectClick(getAdapterPosition());
         }
     }
 
+    public interface OnProspectListener {
+        void onProspectClick(int position);
+    }
 }
