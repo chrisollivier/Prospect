@@ -41,9 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.v("API Status","" + getAllDataFromAPI());
     }
 
-    public View.OnClickListener eventBtnLogin = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+    public View.OnClickListener eventBtnLogin = v -> {
 
             User user = new User(InputLogin.getText().toString(), InputPassword.getText().toString());
             ArrayList<User> allUser = dataBase.readUserFormUser(user);
@@ -60,16 +58,11 @@ public class LoginActivity extends AppCompatActivity {
                 Log.v("Error", "connection failed" + e);
                 InputPassword.setError("Password and username didn't match");
             }
-
-        }
     };
 
-    public View.OnClickListener eventBtnSignIn = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent connexion = new Intent(LoginActivity.this, SignInActivity.class);
-            startActivity(connexion);
-        }
+    public View.OnClickListener eventBtnSignIn = v -> {
+        Intent connexion = new Intent(LoginActivity.this, SignInActivity.class);
+        startActivity(connexion);
     };
 
     private boolean getAllDataFromAPI(){

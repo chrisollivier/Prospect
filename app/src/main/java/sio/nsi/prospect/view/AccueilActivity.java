@@ -22,14 +22,17 @@ public class AccueilActivity extends AppCompatActivity implements ProspectAdapta
     private RecyclerView recycler_View;
     private DataBaseHelper dataBase;
     private ProspectAdaptateur adaptateur;
-    private ArrayList<Prospect> prospectsList = dataBase.readAllProspect();
-    private Button button_AddProspect, back_button, btnLogout;
+    private ArrayList<Prospect> prospectsList;
+    private Button button_AddProspect;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         dataBase = new DataBaseHelper(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueilactivity);
+
+        prospectsList = dataBase.readAllProspect();
+
         recycler_View = (RecyclerView) findViewById(R.id.recycler_View);
         setRecyclerView();
         button_AddProspect = (Button) findViewById(R.id.button_AddProspect);
@@ -43,20 +46,19 @@ public class AccueilActivity extends AppCompatActivity implements ProspectAdapta
 
     }
 
-    public View.OnClickListener backbutton = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(AccueilActivity.this, AccueilActivity.class);
-            startActivity(intent);
-        }
+    public View.OnClickListener backbutton = v -> {
+        Intent intent = new Intent(AccueilActivity.this, AccueilActivity.class);
+        startActivity(intent);
     };
 
-    public View.OnClickListener logout = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(AccueilActivity.this, LoginActivity.class);
-            startActivity(intent);
-        }
+    public View.OnClickListener logout = v -> {
+        Intent intent = new Intent(AccueilActivity.this, LoginActivity.class);
+        startActivity(intent);
+    };
+
+    public View.OnClickListener addprospect = v -> {
+        Intent intent = new Intent(AccueilActivity.this, AddProspectActivity.class);
+        startActivity(intent);
     };
 
     private void setRecyclerView() {
@@ -65,16 +67,6 @@ public class AccueilActivity extends AppCompatActivity implements ProspectAdapta
         adaptateur = new ProspectAdaptateur(this, prospectsList, this);
         recycler_View.setAdapter(adaptateur);
     }
-
-
-    public View.OnClickListener addprospect = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(AccueilActivity.this, AddProspectActivity.class);
-            startActivity(intent);
-        }
-
-    };
 
     @Override
     public void onProspectClick(int position) {

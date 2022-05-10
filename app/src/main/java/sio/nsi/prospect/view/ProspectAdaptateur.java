@@ -18,7 +18,7 @@ import sio.nsi.prospect.model.Prospect;
 
 public class ProspectAdaptateur extends RecyclerView.Adapter<ProspectAdaptateur.ViewHolder> {
     Context context;
-    ArrayList<Prospect> prospect_list = new ArrayList<>();
+    ArrayList<Prospect> prospect_list;
     private OnProspectListener onProspectListener;
 
     public ProspectAdaptateur(Context context, ArrayList<Prospect> prospect_list, OnProspectListener onProspectListener ) {

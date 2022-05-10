@@ -24,6 +24,7 @@ public class AddProspectActivity extends AppCompatActivity {
     private DataBaseHelper dataBase;
     private EditText InputRaisonSocial, InputPrenom, InputNom, InputTel, InputMail;
     private RatingBar InputStarRating;
+    private String siret;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,37 +40,27 @@ public class AddProspectActivity extends AppCompatActivity {
 
         Button btnSubmit = findViewById(R.id.button_createProspect);
         btnSubmit.setOnClickListener(eventBtnSubmit);
+
         ImageView back_button = findViewById(R.id.back_button);
         back_button.setOnClickListener(backbutton);
+
         ImageView btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(logout);
-
     }
 
-    public View.OnClickListener backbutton = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(AddProspectActivity.this, AccueilActivity.class);
-            startActivity(intent);
-        }
+    public View.OnClickListener backbutton = v -> {
+        Intent intent = new Intent(AddProspectActivity.this, AccueilActivity.class);
+        startActivity(intent);
     };
-    public View.OnClickListener logout = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(AddProspectActivity.this, LoginActivity.class);
-            startActivity(intent);
-        }
+    public View.OnClickListener logout = v -> {
+        Intent intent = new Intent(AddProspectActivity.this, LoginActivity.class);
+        startActivity(intent);
     };
 
-    public View.OnClickListener eventBtnSubmit = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            String siret = "";
+    public View.OnClickListener eventBtnSubmit = v -> {
             try {
                 siret = API.getSiretFromRS(InputRaisonSocial.getText().toString());
-            }catch (Exception e){
-
-            }
+            }catch (Exception ignored){}
             dataBase.addNewProspect(new Prospect(
                     InputNom.getText().toString(),
                     InputPrenom.getText().toString(),
@@ -101,6 +92,5 @@ public class AddProspectActivity extends AppCompatActivity {
             }
             Intent connexion = new Intent(AddProspectActivity.this, AccueilActivity.class);
             startActivity(connexion);
-        }
     };
 }

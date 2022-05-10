@@ -18,7 +18,8 @@ public class Prospect {
 
     //Constructor
 
-    public Prospect(String nom, String prenom, String siret, String raisonSociale, int score, String mail, String tel) {
+    public Prospect(int id, String nom, String prenom, String siret, String raisonSociale, int score, String mail, String tel) {
+        this.Id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.siret = siret;
@@ -28,8 +29,7 @@ public class Prospect {
         this.tel = tel;
     }
 
-    public Prospect(int id, String nom, String prenom, String siret, String raisonSociale, int score, String mail, String tel) {
-        this.Id = id;
+    public Prospect(String nom, String prenom, String siret, String raisonSociale, int score, String mail, String tel) {
         this.nom = nom;
         this.prenom = prenom;
         this.siret = siret;

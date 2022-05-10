@@ -35,9 +35,7 @@ public class SignInActivity extends AppCompatActivity {
         btnBackLogin.setOnClickListener(eventBtnBackLogin);
     }
 
-    public View.OnClickListener eventBtnCreated = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+    public View.OnClickListener eventBtnCreated = v -> {
             if (!SignInActivity.isEmpty(InputFName)&&!SignInActivity.isEmpty(InputLName)&&!SignInActivity.isEmpty(InputLogin)&&!SignInActivity.isEmpty(InputPassword)) {
                 dataBase.addNewUser(new User(InputLogin.getText().toString(), InputPassword.getText().toString(), InputFName.getText().toString(), InputLName.getText().toString()));
                 try {
@@ -60,15 +58,11 @@ public class SignInActivity extends AppCompatActivity {
             }else {
                 Toast.makeText(SignInActivity.this,"Des informations sont incompletes ou manquantes",Toast.LENGTH_LONG).show();
             }
-        }
     };
 
-    public View.OnClickListener eventBtnBackLogin = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent connexion = new Intent(SignInActivity.this, LoginActivity.class);
-            startActivity(connexion);
-        }
+    public View.OnClickListener eventBtnBackLogin = v -> {
+        Intent connexion = new Intent(SignInActivity.this, LoginActivity.class);
+        startActivity(connexion);
     };
 
     private static boolean isEmpty(EditText etText) {

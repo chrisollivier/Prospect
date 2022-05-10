@@ -19,13 +19,11 @@
             app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPrenom"
             app:layout_constraintEnd_toEndOf="parent">
 
-        <EditText android:id="@+id/inputRaisonSocial"
+        <TextView android:id="@+id/textRaisonSocial"
                   android:layout_width="250dp"
                   android:layout_height="60dp"
                   android:background="@color/dark_grey"
                   android:ems="10"
-                  android:hint="@string/raison_sociale"
-                  android:inputType="text"
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
                   tools:ignore="SpeakableTextPresentCheck"
@@ -43,13 +41,11 @@
             app:layout_constraintBottom_toTopOf="@+id/textInputLayoutNom"
             app:layout_constraintEnd_toEndOf="parent">
 
-        <EditText android:id="@+id/inputPrenom"
+        <TextView android:id="@+id/textPrenom"
                   android:layout_width="250dp"
                   android:layout_height="60dp"
                   android:background="@color/dark_grey"
                   android:ems="10"
-                  android:hint="@string/prenom"
-                  android:inputType="text"
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
                   tools:ignore="SpeakableTextPresentCheck"
@@ -66,13 +62,11 @@
             app:layout_constraintBottom_toTopOf="@+id/textInputLayoutTel"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
 
-        <EditText android:id="@+id/inputNom"
+        <TextView android:id="@+id/textNom"
                   android:layout_width="250dp"
                   android:layout_height="60dp"
                   android:background="@color/dark_grey"
                   android:ems="10"
-                  android:hint="@string/nom"
-                  android:inputType="text"
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
                   tools:ignore="SpeakableTextPresentCheck"
@@ -90,13 +84,11 @@
             android:layout_marginBottom="73dp"
             app:layout_constraintBottom_toTopOf="@+id/textInputLayoutMail">
 
-        <EditText android:id="@+id/inputTel"
+        <TextView android:id="@+id/textTel"
                   android:layout_width="250dp"
                   android:layout_height="60dp"
                   android:background="@color/dark_grey"
                   android:ems="10"
-                  android:hint="@string/telephone"
-                  android:inputType="phone"
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
                   tools:ignore="SpeakableTextPresentCheck"
@@ -112,15 +104,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="30dp"
             android:layout_marginBottom="73dp"
-            app:layout_constraintBottom_toTopOf="@+id/StarRating">
+            app:layout_constraintBottom_toTopOf="@+id/ShowStarRating"
+            tools:ignore="UnknownIdInLayout">
 
-        <EditText android:id="@+id/inputMail"
+        <TextView android:id="@+id/textMail"
                   android:layout_width="250dp"
                   android:layout_height="60dp"
                   android:background="@color/dark_grey"
                   android:ems="10"
-                  android:hint="@string/email"
-                  android:inputType="textEmailAddress"
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
                   tools:ignore="SpeakableTextPresentCheck"
@@ -129,7 +120,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <RatingBar android:id="@+id/StarRating"
+    <RatingBar android:id="@+id/ShowStarRating"
                android:rating="0"
                android:numStars="5"
                android:stepSize="1"

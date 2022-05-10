@@ -105,9 +105,7 @@ public class API {
      */
     public static String getDataFromRS(String RS) throws IOException, NetworkOnMainThreadException {
         RS = RS.replaceAll(" ", "_").toLowerCase();
-        Log.d("siret", "searching : " + RS);
         URL url = new URL(HTTP_ROUTS_RAISONSOCIALE+RS);
-        System.out.println("url : " + url);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
             for (String line; (line = reader.readLine()) != null; ) {
                 return line;
@@ -123,9 +121,8 @@ public class API {
      * @throws NetworkOnMainThreadException
      */
     public static String getSiretFromRS(String RS) throws IOException, NetworkOnMainThreadException {
-        String data = getDataFromRS(RS);
         try {
-            JSONObject jsonObject = new JSONObject(data);
+            JSONObject jsonObject = new JSONObject(getDataFromRS(RS));
             return jsonObject.getJSONArray("etablissement").getJSONObject(0).getString("siret");
         } catch (JSONException err) {
             return "couldn't find siret";
