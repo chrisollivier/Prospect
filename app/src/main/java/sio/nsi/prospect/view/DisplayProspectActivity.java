@@ -3,10 +3,7 @@ package sio.nsi.prospect.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import sio.nsi.prospect.R;
@@ -49,6 +46,13 @@ public class DisplayProspectActivity extends AppCompatActivity {
         StareRatting.setRating((float) prospect.getScore());
         StareRatting.setEnabled(false);
 
+        Button btn_Modifier = findViewById(R.id.Button_Modifier);
+        btn_Modifier.setOnClickListener(btnModifier);
+
+        Button btn_Enregistre = findViewById(R.id.Button_Enregistrer);
+        btn_Enregistre.setOnClickListener(btnEnregistre);
+        btn_Enregistre.setEnabled(false);
+
         ImageView back_button = findViewById(R.id.back_button);
         back_button.setOnClickListener(backbutton);
 
@@ -67,4 +71,20 @@ public class DisplayProspectActivity extends AppCompatActivity {
         Intent intent = new Intent(DisplayProspectActivity.this, LoginActivity.class);
         startActivity(intent);
     };
+
+    public View.OnClickListener btnModifier = v -> {
+        Button btn_Enregistre = findViewById(R.id.Button_Enregistrer);
+        btn_Enregistre.setEnabled(true);
+        TextNom.setEnabled(true);
+        TextPrenom.setEnabled(true);
+        TextRS.setEnabled(true);
+        TextTel.setEnabled(true);
+        TextMail.setEnabled(true);
+        StareRatting.setEnabled(true);
+    };
+
+    public View.OnClickListener btnEnregistre = v -> {
+
+    };
+
 }

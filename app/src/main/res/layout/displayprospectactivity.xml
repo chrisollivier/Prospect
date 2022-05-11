@@ -10,13 +10,13 @@
     <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutRaisonSocial"
+            android:id="@+id/textLayoutRaisonSocial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="30dp"
             android:layout_marginBottom="73dp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPrenom"
+            app:layout_constraintBottom_toTopOf="@+id/textLayoutPrenom"
             app:layout_constraintEnd_toEndOf="parent">
 
         <EditText android:id="@+id/textRaisonSocial"
@@ -26,20 +26,19 @@
                   android:ems="10"
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
-                  android:autofillHints=""
                   tools:ignore="LabelFor,SpeakableTextPresentCheck"
                   android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutPrenom"
+            android:id="@+id/textLayoutPrenom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="30dp"
             android:layout_marginBottom="73dp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutNom"
+            app:layout_constraintBottom_toTopOf="@+id/textLayoutNom"
             app:layout_constraintEnd_toEndOf="parent">
 
         <EditText android:id="@+id/textPrenom"
@@ -50,19 +49,19 @@
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
                   tools:ignore="LabelFor,SpeakableTextPresentCheck"
-                  android:inputType="text"
-                  android:autofillHints=""/>
+                  android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutNom"
+            android:id="@+id/textLayoutNom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:layout_marginBottom="73dp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutTel"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintBottom_toTopOf="@+id/textLayoutTel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
         <EditText android:id="@+id/textNom"
                   android:layout_width="250dp"
@@ -72,20 +71,19 @@
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
                   android:inputType="text"
-                  tools:ignore="LabelFor,SpeakableTextPresentCheck"
-                  android:autofillHints=""/>
+                  tools:ignore="LabelFor,SpeakableTextPresentCheck"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutTel"
+            android:id="@+id/textLayoutTel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="30dp"
             android:layout_marginBottom="73dp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutMail">
+            app:layout_constraintBottom_toTopOf="@+id/textLayoutMail">
 
         <EditText android:id="@+id/textTel"
                   android:layout_width="250dp"
@@ -95,13 +93,12 @@
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
                   android:inputType="phone"
-                  tools:ignore="LabelFor,SpeakableTextPresentCheck"
-                  android:autofillHints=""/>
+                  tools:ignore="LabelFor,SpeakableTextPresentCheck"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutMail"
+            android:id="@+id/textLayoutMail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -119,8 +116,7 @@
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
                   android:inputType="textEmailAddress"
-                  tools:ignore="LabelFor,SpeakableTextPresentCheck"
-                  android:autofillHints=""/>
+                  tools:ignore="LabelFor,SpeakableTextPresentCheck"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -143,16 +139,35 @@
             android:layout_width="150dp"
             android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="72dp"
+            app:layout_constraintEnd_toEndOf="@+id/ShowStarRating"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ShowStarRating">
 
-        <Button android:id="@+id/button_createProspect"
+        <Button android:id="@+id/Button_Enregistrer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/buttonshape"
-                android:text="@string/envoyer"
+                android:text="Enregistrer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompatModify"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="72dp"
+            app:layout_constraintStart_toStartOf="@+id/ShowStarRating"
+            app:layout_constraintEnd_toStartOf="@+id/ShowStarRating">
+
+        <Button android:id="@+id/Button_Modifier"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/buttonshape"
+                android:text="Modifier"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
@@ -160,15 +175,3 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
-
-
-
-
-
