@@ -19,15 +19,16 @@
             app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPrenom"
             app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView android:id="@+id/textRaisonSocial"
+        <EditText android:id="@+id/textRaisonSocial"
                   android:layout_width="250dp"
                   android:layout_height="60dp"
                   android:background="@color/dark_grey"
                   android:ems="10"
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
-                  tools:ignore="SpeakableTextPresentCheck"
-                  android:autofillHints=""/>
+                  android:autofillHints=""
+                  tools:ignore="LabelFor,SpeakableTextPresentCheck"
+                  android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -41,14 +42,15 @@
             app:layout_constraintBottom_toTopOf="@+id/textInputLayoutNom"
             app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView android:id="@+id/textPrenom"
+        <EditText android:id="@+id/textPrenom"
                   android:layout_width="250dp"
                   android:layout_height="60dp"
                   android:background="@color/dark_grey"
                   android:ems="10"
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
-                  tools:ignore="SpeakableTextPresentCheck"
+                  tools:ignore="LabelFor,SpeakableTextPresentCheck"
+                  android:inputType="text"
                   android:autofillHints=""/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -62,14 +64,15 @@
             app:layout_constraintBottom_toTopOf="@+id/textInputLayoutTel"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView android:id="@+id/textNom"
+        <EditText android:id="@+id/textNom"
                   android:layout_width="250dp"
                   android:layout_height="60dp"
                   android:background="@color/dark_grey"
                   android:ems="10"
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
-                  tools:ignore="SpeakableTextPresentCheck"
+                  android:inputType="text"
+                  tools:ignore="LabelFor,SpeakableTextPresentCheck"
                   android:autofillHints=""/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -84,14 +87,15 @@
             android:layout_marginBottom="73dp"
             app:layout_constraintBottom_toTopOf="@+id/textInputLayoutMail">
 
-        <TextView android:id="@+id/textTel"
+        <EditText android:id="@+id/textTel"
                   android:layout_width="250dp"
                   android:layout_height="60dp"
                   android:background="@color/dark_grey"
                   android:ems="10"
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
-                  tools:ignore="SpeakableTextPresentCheck"
+                  android:inputType="phone"
+                  tools:ignore="LabelFor,SpeakableTextPresentCheck"
                   android:autofillHints=""/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -107,14 +111,15 @@
             app:layout_constraintBottom_toTopOf="@+id/ShowStarRating"
             tools:ignore="UnknownIdInLayout">
 
-        <TextView android:id="@+id/textMail"
+        <EditText android:id="@+id/textMail"
                   android:layout_width="250dp"
                   android:layout_height="60dp"
                   android:background="@color/dark_grey"
                   android:ems="10"
                   android:textColor="@color/white"
                   android:textColorHint="@color/grey"
-                  tools:ignore="SpeakableTextPresentCheck"
+                  android:inputType="textEmailAddress"
+                  tools:ignore="LabelFor,SpeakableTextPresentCheck"
                   android:autofillHints=""/>
 
     </com.google.android.material.textfield.TextInputLayout>

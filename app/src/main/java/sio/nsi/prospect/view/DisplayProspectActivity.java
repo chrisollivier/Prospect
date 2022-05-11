@@ -3,6 +3,7 @@ package sio.nsi.prospect.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -13,7 +14,7 @@ import sio.nsi.prospect.model.Prospect;
 
 public class DisplayProspectActivity extends AppCompatActivity {
     private Prospect prospect;
-    TextView TextNom, TextPrenom, TextRS, TextMail, TextTel;
+    EditText TextNom, TextPrenom, TextRS, TextMail, TextTel;
     RatingBar StareRatting;
 
     protected void onCreate(@Nullable Bundle savedInstanceBundle) {
@@ -31,16 +32,22 @@ public class DisplayProspectActivity extends AppCompatActivity {
 
         TextNom = findViewById(R.id.textNom);
         TextNom.setText(prospect.getNom());
+        TextNom.setEnabled(false);
         TextPrenom = findViewById(R.id.textPrenom);
         TextPrenom.setText(prospect.getPrenom());
+        TextPrenom.setEnabled(false);
         TextRS = findViewById(R.id.textRaisonSocial);
         TextRS.setText(prospect.getRaisonSociale());
+        TextRS.setEnabled(false);
         TextMail = findViewById(R.id.textMail);
         TextMail.setText(prospect.getMail());
+        TextMail.setEnabled(false);
         TextTel = findViewById(R.id.textTel);
         TextTel.setText(prospect.getTel());
+        TextTel.setEnabled(false);
         StareRatting = findViewById(R.id.ShowStarRating);
-        StareRatting.setNumStars(prospect.getScore());
+        StareRatting.setRating((float) prospect.getScore());
+        StareRatting.setEnabled(false);
 
         ImageView back_button = findViewById(R.id.back_button);
         back_button.setOnClickListener(backbutton);
