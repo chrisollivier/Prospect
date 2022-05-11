@@ -71,6 +71,7 @@ public class AccueilActivity extends AppCompatActivity implements ProspectAdapta
     @Override
     public void onProspectClick(int position) {
         Intent intent = new Intent(this, DisplayProspectActivity.class);
+        intent.putExtra("ProspectId", prospectsList.get(position).getId());
         intent.putExtra("ProspectNom", prospectsList.get(position).getNom());
         intent.putExtra("ProspectPrenom", prospectsList.get(position).getPrenom());
         intent.putExtra("ProspectRS", prospectsList.get(position).getRaisonSociale());
@@ -79,6 +80,7 @@ public class AccueilActivity extends AppCompatActivity implements ProspectAdapta
         intent.putExtra("ProspectMail", prospectsList.get(position).getMail());
         intent.putExtra("ProspectTel", prospectsList.get(position).getTel());
         startActivity(intent);
+        this.finish();
     }
 };
 

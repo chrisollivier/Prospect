@@ -13,7 +13,6 @@ import sio.nsi.prospect.model.User;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String key = "YourKey";
@@ -23,7 +22,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final Encryption encryption = Encryption.getDefault(key, salt, iv);
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "NSIProspect.db", null, 14);
+        super(context, "NSIProspect.db", null, 17);
     }
 
     @Override
@@ -62,8 +61,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
             ContentValues values = new ContentValues();
 
-            values.put("email",user.getEmail());
-            values.put("password",user.getPassword());
+            values.put("email", user.getEmail());
+            values.put("password", user.getPassword());
             values.put("nom", user.getNom());
             values.put("prenom", user.getPrenom());
 
@@ -105,7 +104,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      * Lecture des data d'un utilisateur
      * @param user
      * @return ArrayList<User>
-    */
+     */
     public ArrayList<User> readUserFormUser(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -132,7 +131,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      * Check si un utilisateur existe
      * @param String email
      * @return int
-    */
+     */
     public int readNumberUserFromMail(String mail) {
         SQLiteDatabase db = this.getReadableDatabase();
         userResult = 0;
@@ -151,19 +150,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /*
      * Ajout d'un prospect
      * @param prospect
-    */
+     */
     public void addNewProspect(Prospect prospect) {
         try {
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
             ContentValues values = new ContentValues();
 
-            values.put("nom",prospect.getNom());
-            values.put("prenom",prospect.getPrenom());
-            values.put("siret",prospect.getSiret());
-            values.put("raisonSociale",prospect.getRaisonSociale());
-            values.put("score",prospect.getScore());
-            values.put("mail",prospect.getMail());
-            values.put("tel",prospect.getTel());
+            values.put("nom", prospect.getNom());
+            values.put("prenom", prospect.getPrenom());
+            values.put("siret", prospect.getSiret());
+            values.put("raisonSociale", prospect.getRaisonSociale());
+            values.put("score", prospect.getScore());
+            values.put("mail", prospect.getMail());
+            values.put("tel", prospect.getTel());
 
             sqLiteDatabase.insert("prospect", null, values);
             sqLiteDatabase.close();
@@ -179,7 +178,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      */
     public ArrayList<Prospect> readAllProspect() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursorProspect = db.rawQuery("SELECT * FROM prospect",new String[]{});
+        Cursor cursorProspect = db.rawQuery("SELECT * FROM prospect", new String[]{});
         ArrayList<Prospect> prospectArrayList = new ArrayList<>();
         if (cursorProspect.moveToFirst()) {
             do {
@@ -200,14 +199,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /*
-    * Check si un prospect existe depuis son nom, prénom et Siret
-    * @param String nom, String prenom, String siret
-    * @return int
+     * Check si un prospect existe depuis son nom, prénom et Siret
+     * @param String nom, String prenom, String siret
+     * @return int
      */
-    public int readNumberProspectFromNomPrenomSiret(String nom ,String prenom ,String siret) {
+    public int readNumberProspectFromNomPrenomSiret(String nom, String prenom, String siret) {
         SQLiteDatabase db = this.getReadableDatabase();
         userResult = 0;
-        Cursor cursorUser = db.rawQuery("SELECT * FROM prospect WHERE nom = ? And prenom = ? And siret = ?", new String[]{nom,prenom,siret});
+        Cursor cursorUser = db.rawQuery("SELECT * FROM prospect WHERE nom = ? And prenom = ? And siret = ?", new String[]{nom, prenom, siret});
 
         if (cursorUser.moveToFirst()) {
             do {
@@ -217,4 +216,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursorUser.close();
         return userResult;
     }
+
+    public void updateProspectFromProspect(Prospect prospect) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("nom", prospect.getNom());
+        values.put("prenom", prospect.getPrenom());
+        values.put("siret", prospect.getSiret());
+        values.put("raisonSociale", prospect.getRaisonSociale());
+        values.put("score", prospect.getScore());
+        values.put("mail", prospect.getMail());
+        values.put("tel", prospect.getTel());
+
+        db.update("prospect", values, "Id = ?", new String[]{String.valueOf((prospect.getId()))});
+        db.close();
+    }
 }
+
+

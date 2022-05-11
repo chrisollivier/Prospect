@@ -2,23 +2,32 @@ package sio.nsi.prospect.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import sio.nsi.prospect.R;
 import sio.nsi.prospect.model.Prospect;
+import sio.nsi.prospect.tools.API;
+import sio.nsi.prospect.tools.DataBaseHelper;
 
 public class DisplayProspectActivity extends AppCompatActivity {
     private Prospect prospect;
+    private DataBaseHelper dataBase;
     EditText TextNom, TextPrenom, TextRS, TextMail, TextTel;
     RatingBar StareRatting;
 
     protected void onCreate(@Nullable Bundle savedInstanceBundle) {
         super.onCreate(savedInstanceBundle);
+        dataBase = new DataBaseHelper(this);
         setContentView(R.layout.displayprospectactivity);
         Bundle bundle = getIntent().getExtras();
-        prospect = new Prospect(bundle.getString("ProspectNom"),
+        prospect = new Prospect(
+                bundle.getInt("ProspectId"),
+                bundle.getString("ProspectNom"),
                 bundle.getString("ProspectPrenom"),
                 bundle.getString("ProspectSiret"),
                 bundle.getString("ProspectRS"),
@@ -26,6 +35,7 @@ public class DisplayProspectActivity extends AppCompatActivity {
                 bundle.getString("ProspectMail"),
                 bundle.getString("ProspectTel")
         );
+        Log.v("prospect", prospect.toString());
 
         TextNom = findViewById(R.id.textNom);
         TextNom.setText(prospect.getNom());
@@ -84,7 +94,38 @@ public class DisplayProspectActivity extends AppCompatActivity {
     };
 
     public View.OnClickListener btnEnregistre = v -> {
-
+        try {
+            String siret = API.getSiretFromRS(TextRS.getText().toString());
+            prospect.setNom(TextNom.getText().toString());
+            prospect.setPrenom(TextPrenom.getText().toString());
+            prospect.setRaisonSociale(TextRS.getText().toString());
+            prospect.setSiret(siret);
+            prospect.setScore((int) StareRatting.getRating());
+            prospect.setMail(TextMail.getText().toString());
+            prospect.setTel(TextTel.getText().toString());
+            dataBase.updateProspectFromProspect(prospect);
+        } catch (Exception ignored) {}
+        try {
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("Prospect", new JSONArray());
+            JSONObject ProspectJson = new JSONObject();
+            for (Prospect prospect : dataBase.readAllProspect()) {
+                Log.v("prospect", prospect.toString());
+                ProspectJson.put("id", prospect.getId());
+                ProspectJson.put("nom", prospect.getNom());
+                ProspectJson.put("prenom", prospect.getPrenom());
+                ProspectJson.put("siret", prospect.getSiret());
+                ProspectJson.put("score", prospect.getScore());
+                ProspectJson.put("raisonsocial", prospect.getRaisonSociale());
+                ProspectJson.put("mail", prospect.getMail());
+                ProspectJson.put("tel", prospect.getTel());
+                jsonBody.accumulate("Prospect", ProspectJson);
+            }
+            Log.v("Post Json", jsonBody.toString());
+            Log.v("Post status", "" + API.postProspect(jsonBody.toString()));
+        } catch (Exception e) {}
+        Intent connexion = new Intent(DisplayProspectActivity.this, AccueilActivity.class);
+        startActivity(connexion);
     };
 
 }
