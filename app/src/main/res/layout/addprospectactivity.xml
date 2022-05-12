@@ -10,156 +10,161 @@
     <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutRaisonSocial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="30dp"
-            android:layout_marginBottom="73dp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPrenom"
-            app:layout_constraintEnd_toEndOf="parent">
+        android:id="@+id/textInputLayoutRaisonSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <EditText android:id="@+id/inputRaisonSocial"
-                  android:layout_width="250dp"
-                  android:layout_height="60dp"
-                  android:background="@color/dark_grey"
-                  android:ems="10"
-                  android:hint="@string/raison_sociale"
-                  android:inputType="text"
-                  android:textColor="@color/white"
-                  android:textColorHint="@color/grey"
-                  tools:ignore="SpeakableTextPresentCheck"
-                  android:autofillHints=""/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutPrenom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="30dp"
-            android:layout_marginBottom="73dp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutNom"
-            app:layout_constraintEnd_toEndOf="parent">
-
-        <EditText android:id="@+id/inputPrenom"
-                  android:layout_width="250dp"
-                  android:layout_height="60dp"
-                  android:background="@color/dark_grey"
-                  android:ems="10"
-                  android:hint="@string/prenom"
-                  android:inputType="text"
-                  android:textColor="@color/white"
-                  android:textColorHint="@color/grey"
-                  tools:ignore="SpeakableTextPresentCheck"
-                  android:autofillHints=""/>
+        <EditText
+            android:id="@+id/inputRaisonSocial"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:autofillHints=""
+            android:background="@color/dark_grey"
+            android:ems="10"
+            android:hint="@string/raison_sociale"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutNom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:layout_marginBottom="73dp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutTel"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+        android:id="@+id/textInputLayoutPrenom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRaisonSocial">
 
-        <EditText android:id="@+id/inputNom"
-                  android:layout_width="250dp"
-                  android:layout_height="60dp"
-                  android:background="@color/dark_grey"
-                  android:ems="10"
-                  android:hint="@string/nom"
-                  android:inputType="text"
-                  android:textColor="@color/white"
-                  android:textColorHint="@color/grey"
-                  tools:ignore="SpeakableTextPresentCheck"
-                  android:autofillHints=""/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutTel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="30dp"
-            android:layout_marginBottom="73dp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutMail">
-
-        <EditText android:id="@+id/inputTel"
-                  android:layout_width="250dp"
-                  android:layout_height="60dp"
-                  android:background="@color/dark_grey"
-                  android:ems="10"
-                  android:hint="@string/telephone"
-                  android:inputType="phone"
-                  android:textColor="@color/white"
-                  android:textColorHint="@color/grey"
-                  tools:ignore="SpeakableTextPresentCheck"
-                  android:autofillHints=""/>
+        <EditText
+            android:id="@+id/inputPrenom"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:autofillHints=""
+            android:background="@color/dark_grey"
+            android:ems="10"
+            android:hint="@string/prenom"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutMail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="30dp"
-            android:layout_marginBottom="73dp"
-            app:layout_constraintBottom_toTopOf="@+id/StarRating">
+        android:id="@+id/textInputLayoutNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPrenom">
 
-        <EditText android:id="@+id/inputMail"
-                  android:layout_width="250dp"
-                  android:layout_height="60dp"
-                  android:background="@color/dark_grey"
-                  android:ems="10"
-                  android:hint="@string/email"
-                  android:inputType="textEmailAddress"
-                  android:textColor="@color/white"
-                  android:textColorHint="@color/grey"
-                  tools:ignore="SpeakableTextPresentCheck"
-                  android:autofillHints=""/>
+        <EditText
+            android:id="@+id/inputNom"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:autofillHints=""
+            android:background="@color/dark_grey"
+            android:ems="10"
+            android:hint="@string/nom"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutTel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNom">
+
+        <EditText
+            android:id="@+id/inputTel"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:autofillHints=""
+            android:background="@color/dark_grey"
+            android:ems="10"
+            android:hint="@string/telephone"
+            android:inputType="phone"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTel"
+        android:layout_marginTop="32dp">
+
+        <EditText
+            android:id="@+id/inputMail"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:autofillHints=""
+            android:background="@color/dark_grey"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <RatingBar android:id="@+id/StarRating"
-               android:rating="0"
-               android:numStars="5"
-               android:stepSize="1"
-               android:layout_width="245dp"
-               android:layout_height="60dp"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat"
-               android:layout_margin="30dp"
-               app:layout_constraintStart_toStartOf="parent"
-               android:progressTint="#FDDE12"
-               tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck"/>
+    <RatingBar
+        android:id="@+id/StarRating"
+        android:layout_width="245dp"
+        android:layout_height="60dp"
+        android:layout_margin="30dp"
+        android:layout_marginTop="32dp"
+        android:numStars="5"
+        android:progressTint="#FDDE12"
+        android:rating="0"
+        android:stepSize="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutMail"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/linearLayoutCompat"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
+        android:id="@+id/linearLayoutCompat"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StarRating">
+
+        <Button
+            android:id="@+id/button_createProspect"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/buttonshape"
+            android:text="@string/envoyer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="30dp">
-
-        <Button android:id="@+id/button_createProspect"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/buttonshape"
-                android:text="@string/envoyer"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
