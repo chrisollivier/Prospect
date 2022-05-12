@@ -14,8 +14,10 @@ import sio.nsi.prospect.model.Prospect;
 import sio.nsi.prospect.tools.API;
 import sio.nsi.prospect.tools.DataBaseHelper;
 
+import java.util.ArrayList;
+
 public class DisplayProspectActivity extends AppCompatActivity {
-    private Prospect prospect;
+    private Prospect prospectapp;
     private DataBaseHelper dataBase;
     EditText TextNom, TextPrenom, TextRS, TextMail, TextTel;
     RatingBar StareRatting;
@@ -25,7 +27,7 @@ public class DisplayProspectActivity extends AppCompatActivity {
         dataBase = new DataBaseHelper(this);
         setContentView(R.layout.displayprospectactivity);
         Bundle bundle = getIntent().getExtras();
-        prospect = new Prospect(
+        prospectapp = new Prospect(
                 bundle.getInt("ProspectId"),
                 bundle.getString("ProspectNom"),
                 bundle.getString("ProspectPrenom"),
@@ -35,25 +37,24 @@ public class DisplayProspectActivity extends AppCompatActivity {
                 bundle.getString("ProspectMail"),
                 bundle.getString("ProspectTel")
         );
-        Log.v("prospect", prospect.toString());
 
         TextNom = findViewById(R.id.textNom);
-        TextNom.setText(prospect.getNom());
+        TextNom.setText(prospectapp.getNom());
         TextNom.setEnabled(false);
         TextPrenom = findViewById(R.id.textPrenom);
-        TextPrenom.setText(prospect.getPrenom());
+        TextPrenom.setText(prospectapp.getPrenom());
         TextPrenom.setEnabled(false);
         TextRS = findViewById(R.id.textRaisonSocial);
-        TextRS.setText(prospect.getRaisonSociale());
+        TextRS.setText(prospectapp.getRaisonSociale());
         TextRS.setEnabled(false);
         TextMail = findViewById(R.id.textMail);
-        TextMail.setText(prospect.getMail());
+        TextMail.setText(prospectapp.getMail());
         TextMail.setEnabled(false);
         TextTel = findViewById(R.id.textTel);
-        TextTel.setText(prospect.getTel());
+        TextTel.setText(prospectapp.getTel());
         TextTel.setEnabled(false);
         StareRatting = findViewById(R.id.ShowStarRating);
-        StareRatting.setRating((float) prospect.getScore());
+        StareRatting.setRating((float) prospectapp.getScore());
         StareRatting.setEnabled(false);
 
         Button btn_Modifier = findViewById(R.id.Button_Modifier);
@@ -96,34 +97,36 @@ public class DisplayProspectActivity extends AppCompatActivity {
     public View.OnClickListener btnEnregistre = v -> {
         try {
             String siret = API.getSiretFromRS(TextRS.getText().toString());
-            prospect.setNom(TextNom.getText().toString());
-            prospect.setPrenom(TextPrenom.getText().toString());
-            prospect.setRaisonSociale(TextRS.getText().toString());
-            prospect.setSiret(siret);
-            prospect.setScore((int) StareRatting.getRating());
-            prospect.setMail(TextMail.getText().toString());
-            prospect.setTel(TextTel.getText().toString());
-            dataBase.updateProspectFromProspect(prospect);
+            prospectapp.setNom(TextNom.getText().toString());
+            prospectapp.setPrenom(TextPrenom.getText().toString());
+            prospectapp.setRaisonSociale(TextRS.getText().toString());
+            prospectapp.setSiret(siret);
+            prospectapp.setScore((int) StareRatting.getRating());
+            prospectapp.setMail(TextMail.getText().toString());
+            prospectapp.setTel(TextTel.getText().toString());
+            dataBase.updateProspectFromProspect(prospectapp);
         } catch (Exception ignored) {}
         try {
-            JSONObject jsonBody = new JSONObject();
-            jsonBody.put("Prospect", new JSONArray());
-            JSONObject ProspectJson = new JSONObject();
-            for (Prospect prospect : dataBase.readAllProspect()) {
-                Log.v("prospect", prospect.toString());
-                ProspectJson.put("id", prospect.getId());
-                ProspectJson.put("nom", prospect.getNom());
-                ProspectJson.put("prenom", prospect.getPrenom());
-                ProspectJson.put("siret", prospect.getSiret());
-                ProspectJson.put("score", prospect.getScore());
-                ProspectJson.put("raisonsocial", prospect.getRaisonSociale());
-                ProspectJson.put("mail", prospect.getMail());
-                ProspectJson.put("tel", prospect.getTel());
-                jsonBody.accumulate("Prospect", ProspectJson);
+            JSONObject jsonProspect = new JSONObject();
+            jsonProspect.put("Prospect", new JSONArray());
+            ArrayList<Prospect> listOfAllProspect = dataBase.readAllProspect();
+            for (int i = 0; i < dataBase.readAllProspect().size() ; i++) {
+                JSONObject ProspectJson = new JSONObject();
+                ProspectJson.put("id", listOfAllProspect.get(i).getId());
+                ProspectJson.put("nom", listOfAllProspect.get(i).getNom());
+                ProspectJson.put("prenom", listOfAllProspect.get(i).getPrenom());
+                ProspectJson.put("siret", listOfAllProspect.get(i).getSiret());
+                ProspectJson.put("score", listOfAllProspect.get(i).getScore());
+                ProspectJson.put("raisonsocial", listOfAllProspect.get(i).getRaisonSociale());
+                ProspectJson.put("mail", listOfAllProspect.get(i).getMail());
+                ProspectJson.put("tel", listOfAllProspect.get(i).getTel());
+                jsonProspect.accumulate("Prospect", ProspectJson);
             }
-            Log.v("Post Json", jsonBody.toString());
-            Log.v("Post status", "" + API.postProspect(jsonBody.toString()));
-        } catch (Exception e) {}
+            Log.v("Post status", "" + API.postProspect(jsonProspect.toString()));
+        } catch (Exception e) {
+            Log.v("error", e.getMessage());
+        }
+
         Intent connexion = new Intent(DisplayProspectActivity.this, AccueilActivity.class);
         startActivity(connexion);
     };

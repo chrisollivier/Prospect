@@ -22,7 +22,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final Encryption encryption = Encryption.getDefault(key, salt, iv);
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "NSIProspect.db", null, 17);
+        super(context, "NSIProspect.db", null, 19);
     }
 
     @Override

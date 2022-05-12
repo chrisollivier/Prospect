@@ -58,39 +58,39 @@ public class AddProspectActivity extends AppCompatActivity {
     };
 
     public View.OnClickListener eventBtnSubmit = v -> {
-            try {
-                siret = API.getSiretFromRS(InputRaisonSocial.getText().toString());
-            }catch (Exception ignored){}
-            dataBase.addNewProspect(new Prospect(
-                    InputNom.getText().toString(),
-                    InputPrenom.getText().toString(),
-                    siret,
-                    InputRaisonSocial.getText().toString(),
-                    (int) InputStarRating.getRating(),
-                    InputMail.getText().toString(),
-                    InputTel.getText().toString()));
-            try {
-                JSONObject jsonBody = new JSONObject();
-                jsonBody.put("Prospect", new JSONArray());
+        try {
+            siret = API.getSiretFromRS(InputRaisonSocial.getText().toString());
+        } catch (Exception ignored) {
+        }
+        dataBase.addNewProspect(new Prospect(
+                InputNom.getText().toString(),
+                InputPrenom.getText().toString(),
+                siret,
+                InputRaisonSocial.getText().toString(),
+                (int) InputStarRating.getRating(),
+                InputMail.getText().toString(),
+                InputTel.getText().toString()));
+        try {
+            JSONObject jsonProspect = new JSONObject();
+            jsonProspect.put("Prospect", new JSONArray());
+            ArrayList<Prospect> listOfAllProspect = dataBase.readAllProspect();
+            for (int i = 0; i < dataBase.readAllProspect().size(); i++) {
                 JSONObject ProspectJson = new JSONObject();
-                for (Prospect prospect : dataBase.readAllProspect()) {
-                    ProspectJson.put("id", prospect.getId());
-                    ProspectJson.put("nom", prospect.getNom());
-                    ProspectJson.put("prenom", prospect.getPrenom());
-                    ProspectJson.put("siret", prospect.getSiret());
-                    ProspectJson.put("score", prospect.getScore());
-                    ProspectJson.put("raisonsocial", prospect.getRaisonSociale());
-                    ProspectJson.put("mail", prospect.getMail());
-                    ProspectJson.put("tel", prospect.getTel());
-                    jsonBody.accumulate("Prospect", ProspectJson);
-                }
-                Log.v("Post Json",jsonBody.toString());
-                Log.v("button", "Siret search button clicked");
-                Log.v("Post status", "" + API.postProspect(jsonBody.toString()));
-            } catch (Exception e) {
-                Log.v("error", e.getMessage());
+                ProspectJson.put("id", listOfAllProspect.get(i).getId());
+                ProspectJson.put("nom", listOfAllProspect.get(i).getNom());
+                ProspectJson.put("prenom", listOfAllProspect.get(i).getPrenom());
+                ProspectJson.put("siret", listOfAllProspect.get(i).getSiret());
+                ProspectJson.put("score", listOfAllProspect.get(i).getScore());
+                ProspectJson.put("raisonsocial", listOfAllProspect.get(i).getRaisonSociale());
+                ProspectJson.put("mail", listOfAllProspect.get(i).getMail());
+                ProspectJson.put("tel", listOfAllProspect.get(i).getTel());
+                jsonProspect.accumulate("Prospect", ProspectJson);
             }
-            Intent connexion = new Intent(AddProspectActivity.this, AccueilActivity.class);
-            startActivity(connexion);
+            Log.v("Post status", "" + API.postProspect(jsonProspect.toString()));
+        } catch (Exception e) {
+            Log.v("error", e.getMessage());
+        }
+        Intent connexion = new Intent(AddProspectActivity.this, AccueilActivity.class);
+        startActivity(connexion);
     };
 }
